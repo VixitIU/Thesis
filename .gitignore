@@ -1,0 +1,10 @@
+data/raw/
+data/interim/
+.env
+*.pgpass
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+mlruns/
+envs/
+~$*.docx
