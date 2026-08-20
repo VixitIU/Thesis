@@ -5,7 +5,6 @@ __pycache__/
 *.pyc
 *.ipynb
 .ipynb_checkpoints/
-mlruns/
 envs/
 ~$*.docx
 anaconda_projects/
