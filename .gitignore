@@ -1,10 +1,11 @@
-data/raw/
 data/interim/
 .env
 *.pgpass
 __pycache__/
 *.pyc
+*.ipynb
 .ipynb_checkpoints/
 mlruns/
 envs/
 ~$*.docx
+anaconda_projects/
