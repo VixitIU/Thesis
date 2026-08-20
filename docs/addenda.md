@@ -38,3 +38,38 @@ D2), D6 as applicable, D7, D8, D9, D10.
 
 **Effect on frozen values.** None. No threshold, candidate set, rule or
 criterion is altered.
+
+
+
+## Addendum 20 August 2026
+
+**Rows affected:** D8, D9 (clarification only; no frozen value changes)
+
+**Status:** Filed before any step of Section D was executed. Not prompted by
+observed output; no training results existed at the time of writing.
+
+**Clarification.** D7 declares that the holiday pad is selected by AICc with the
+M1 orders and annual form held fixed. D8 and D9 declare the two-stage
+screen-then-select rule for the FX and search lags but do not state whether the
+orders and annual form are likewise held fixed during the AICc stage, or
+re-selected for each candidate lag as D5 does for the Fourier term count. The
+distinction is material: if orders were re-selected with the candidate regressor
+in the model, M3 and M4 could differ from M1 in ARIMA orders as well as in
+regressors, and M1 would no longer be a special case of them. E8 and E9 assign
+the Clark-West test to all four M-versus-M1 comparisons on the grounds that each
+augmented model nests M1, and D10 transfers the pad and lags to M5 without
+re-tuning on the same assumption.
+
+**Resolution.** Indicator-lag AICc selection at D8 and D9 is performed with the
+orders and annual form of the operative M1 specification held fixed, as already
+declared for the pad at D7. "Operative" is the specification produced by D5 on
+the scale in force after D11, per the addendum of 19 August 2026: on the count
+scale if the trigger does not hold, on log(y + 1) if it does. Only the candidate
+lag varies within each AICc comparison. M2 through M5 therefore differ from M1
+in their exogenous regressors alone, and the nesting relied on at E8 and E9
+holds by construction.
+
+**Effect on frozen values.** None. No threshold, candidate set, rule or
+criterion is altered. The candidate lag windows (D8: 28-90 days; D9: 28, 35,
+..., 119), the five-candidate CCF screen, the AICc criterion and the
+shorter-lag tie-break are unchanged.
