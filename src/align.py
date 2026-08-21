@@ -8,12 +8,21 @@ import re
 import pandas as pd
 
 DATA = Path(r"C:\Users\New\Documents\IU work\Thesis\project\data")
+PRIVATE = Path(r"C:\Users\New\Documents\IU work\Thesis\data")
+
 SPINE_START, SPINE_END = "2023-07-01", "2026-07-31"
 N_DAYS = 1127
-
 QUERIES = ["туры в Таиланд", "туры в Тайланд", "туры на Пхукет", "туры в Паттайю"]
+TRAIN_END = pd.Timestamp("2025-11-30")
 
 
+def load_train() -> pd.DataFrame:
+    """Training subset, with a hard guard against a stale or wrong file."""
+    df = pd.read_csv(PRIVATE / "aligned_train.csv", parse_dates=["obs_date"]).set_index("obs_date")
+    assert df.index.max() <= TRAIN_END, f"training file reaches {df.index.max().date()}"
+    assert len(df) == 884, f"training file has {len(df)} rows"
+    return df
+    
 def _spine() -> pd.DatetimeIndex:
     return pd.date_range(SPINE_START, SPINE_END, freq="D", name="obs_date")
 
@@ -78,8 +87,15 @@ def build() -> pd.DataFrame:
     assert (df["cases"] >= 0).all()
     assert (df["fx_rub_per_thb"] > 0).all()
     return df
-
+    
+def write_outputs() -> None:
+    df = build()
+    df.to_csv(PRIVATE / "aligned_daily.csv")
+    tr = df.loc[:TRAIN_END]
+    assert len(tr) == 884, f"expected 884 training rows, got {len(tr)}"
+    tr.to_csv(PRIVATE / "aligned_train.csv")
+    print(f"full: {len(df)} rows -> {PRIVATE / 'aligned_daily.csv'}")
+    print(f"train: {len(tr)} rows -> {PRIVATE / 'aligned_train.csv'}")
 
 if __name__ == "__main__":
-    out = build()
-    out.to_csv(r"C:\Users\New\Documents\IU work\Thesis\data\aligned_daily.csv")
+    write_outputs()
