@@ -9,6 +9,7 @@ import pandas as pd
 import align
 import re
 
+
 SPLIT = pd.Timestamp("2025-11-30")
 WORDSTAT_RETRIEVED = pd.Timestamp("2026-08-20")
 WORDSTAT_LATEST_WEEK = pd.Timestamp("2026-08-10")
@@ -23,19 +24,6 @@ def load_full() -> pd.DataFrame:
     )
     return df.set_index("obs_date")
 
-
-def load_train() -> pd.DataFrame:
-    df = pd.read_csv(
-        align.PRIVATE / "aligned_train.csv",
-        parse_dates=["obs_date"]
-    ).set_index("obs_date")
-
-    assert df.index.min() == pd.Timestamp(align.SPINE_START)
-    assert df.index.max() == align.TRAIN_END
-    assert (df.index > align.TRAIN_END).sum() == 0
-    assert len(df) == 884
-
-    return df
 
 
 def integrity(df: pd.DataFrame) -> dict:
@@ -153,7 +141,7 @@ def seasonal_shape(tr: pd.DataFrame) -> tuple:
 
 def report() -> None:
     full = load_full()
-    train = load_train()
+    train = align.load_train()
 
     for name, block in [
         ("Integrity (full sample)", integrity(full)),

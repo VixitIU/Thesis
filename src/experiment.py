@@ -9,6 +9,8 @@ from contextlib import contextmanager
 from pathlib import Path
 import platform
 import subprocess
+import os
+os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
 import mlflow
 
 try:

@@ -19,8 +19,10 @@ TRAIN_END = pd.Timestamp("2025-11-30")
 def load_train() -> pd.DataFrame:
     """Training subset, with a hard guard against a stale or wrong file."""
     df = pd.read_csv(PRIVATE / "aligned_train.csv", parse_dates=["obs_date"]).set_index("obs_date")
-    assert df.index.max() <= TRAIN_END, f"training file reaches {df.index.max().date()}"
-    assert len(df) == 884, f"training file has {len(df)} rows"
+    assert df.index.min() == pd.Timestamp(SPINE_START)
+    assert df.index.max() == TRAIN_END
+    assert (df.index > TRAIN_END).sum() == 0
+    assert len(df) == 884
     return df
     
 def _spine() -> pd.DatetimeIndex:
