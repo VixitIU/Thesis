@@ -58,7 +58,8 @@ def load_search(dirpath: Path) -> pd.Series:
     """C3-3: four series summed, then step-expanded, constant within its week."""
     weekly = {}
     for f in sorted(dirpath.glob("wordstat_dynamic_*.csv")):
-        raw = f.read_text(encoding="utf-8-sig", newline="")
+        with f.open(encoding="utf-8-sig", newline="") as fh:
+            raw = fh.read()
         lines = [l for l in raw.split("\r") if l.strip()]
         query = re.search(r"«(.+?)»", lines[0].split(";")[3]).group(1)
         recs = [(pd.to_datetime(p[0], format="%d.%m.%Y"), int(p[1].replace(" ", "")))
@@ -68,7 +69,8 @@ def load_search(dirpath: Path) -> pd.Series:
     assert set(weekly) == set(QUERIES), f"C3-1 query set mismatch: {sorted(weekly)}"
     W = pd.DataFrame(weekly)
     assert W.notna().all().all(), "weeks not common to all four series"
-    assert (W.index.to_series().diff().dropna() == pd.Timedelta("7D")).all(), "week gap"
+    gaps = W.index.to_series().diff().dropna().dt.days
+    assert (gaps == 7).all(), "week gap"
 
     total = W.sum(axis=1)
     daily = total.reindex(_spine().union(total.index)).ffill().reindex(_spine())

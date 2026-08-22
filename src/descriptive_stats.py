@@ -29,7 +29,8 @@ def load_full() -> pd.DataFrame:
 def integrity(df: pd.DataFrame) -> dict:
     """Full-sample checks: spine completeness, zero counts, split sizes."""
     spine = align._spine()
-    tr, te = df.loc[:SPLIT], df.loc[SPLIT + pd.Timedelta(days=1):]
+    tr = df.loc[df.index <= align.TRAIN_END]
+    te = df.loc[df.index > align.TRAIN_END]
     return {
         "n_obs": len(df),
         "spine_matches": df.index.equals(spine),
@@ -75,7 +76,8 @@ def search_structure() -> dict:
     """Week count, common index and gap check across the four frozen queries."""
     weekly = {}
     for f in sorted((align.DATA / "raw").glob("wordstat_dynamic_*.csv")):
-        raw = f.read_text(encoding="utf-8-sig", newline="")
+        with f.open(encoding="utf-8-sig", newline="") as fh:
+            raw = fh.read()
         lines = [l for l in raw.split("\r") if l.strip()]
         query = re.search(r"«(.+?)»", lines[0].split(";")[3]).group(1)
         recs = [(pd.to_datetime(p[0], format="%d.%m.%Y"), int(p[1].replace(" ", "")))
@@ -83,8 +85,8 @@ def search_structure() -> dict:
         weekly[query] = pd.Series(dict(recs)).sort_index()
 
     W = pd.DataFrame(weekly)
-    spacing = W.index.to_series().diff().dropna()
-    week_end = WORDSTAT_LATEST_WEEK + pd.Timedelta(days=6)
+    gaps = W.index.to_series().diff().dropna().dt.days
+    week_end = WORDSTAT_LATEST_WEEK + pd.Timedelta(6, unit="D")
     delay_from_week_end = (WORDSTAT_RETRIEVED - week_end).days
 
 
@@ -92,7 +94,7 @@ def search_structure() -> dict:
         "n_queries": W.shape[1],
         "n_weeks": W.shape[0],
         "common_index_complete": bool(W.notna().all().all()),
-        "all_gaps_seven_days": bool((spacing == pd.Timedelta("7D")).all()),
+        "all_gaps_seven_days": bool((gaps == 7).all()),
         "first_week": W.index.min().date().isoformat(),
         "last_week": W.index.max().date().isoformat(),
         "delay_from_week_end_days": delay_from_week_end,
