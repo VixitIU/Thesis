@@ -73,3 +73,21 @@ holds by construction.
 criterion is altered. The candidate lag windows (D8: 28-90 days; D9: 28, 35,
 ..., 119), the five-candidate CCF screen, the AICc criterion and the
 shorter-lag tie-break are unchanged.
+
+
+
+## Addendum 23 August 2026
+
+**Rows affected:** D4, D12 (execution order and inheritance clarification only; no frozen value changes)
+
+**Status:** Filed before any test-window forecast was produced. Prompted by review of the implementation sequence, not by observed model output. The clarification addresses a branch that has not yet been executed and does not depend on the outcome of the D11 scale trigger or on any transformed-scale diagnostic result.
+
+**Clarification.** The addendum of 19 August 2026 specifies that, if the D11 scale trigger holds, D2, D3 and D5 are re-run on log(y + 1). It does not explicitly state whether D4 is re-applied after the transformed-scale differencing orders are selected. D4 defines inclusion of a constant conditionally on those orders: a constant is included if and only if d = D = 0. Therefore, carrying forward the count-scale D4 decision independently of the transformed-scale D2 and D3 results could be inconsistent with the frozen D4 rule.
+
+**Resolution.** If D11 triggers D12, D4 is mechanically re-applied after D2 and D3 are re-run on log(y + 1) and before D5 is re-run. The constant decision is determined from the transformed-scale differencing orders using the unchanged D4 rule: a constant is included if and only if d = D = 0. No count-scale value of d, D or the constant decision is inherited into the transformed-scale D5 run.
+
+Accordingly, the D12 re-selection sequence is D2, D3, D4, D5 on log(y + 1). If the transformed-scale selections are d = D = 0, D5 is run with a constant; otherwise it is run without a constant. All other D5 candidate sets, restrictions, criteria and diagnostic gates remain unchanged.
+
+The execution order for Section D is therefore: D1, D2, D3, D4, D5, D11, (D12 if triggered, returning to D2, D3, D4 and D5 on log(y + 1)), D6 as applicable, D7, D8, D9, D10.
+
+**Effect on frozen values.** None. No threshold, candidate set, rule or criterion is altered. This addendum only makes explicit that D4, as a deterministic rule conditional on the selected differencing orders, is re-evaluated whenever D2 and D3 are re-run under D12.
