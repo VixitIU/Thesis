@@ -108,13 +108,13 @@ def main() -> None:
     d2_record = json.loads(d2_path.read_text())
     
     if d2_record.get("protocol_tag") != d5.PROTOCOL_TAG:
-    sys.exit(
-        "protocol-state mismatch: transformed D2 records {}, "
-        "but this D3 implementation expects {}.".format(
-            d2_record.get("protocol_tag"),
-            d5.PROTOCOL_TAG,
+        sys.exit(
+            "protocol-state mismatch: transformed D2 records {}, "
+            "but this D3 implementation expects {}.".format(
+                d2_record.get("protocol_tag"),
+                d5.PROTOCOL_TAG,
+            )
         )
-    )
 
     if d2_record.get("row") != "D2":
         sys.exit(
