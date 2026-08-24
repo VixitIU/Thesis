@@ -192,6 +192,7 @@ SEASONAL_M = 7
 FIXED_d = 1
 FIXED_D = 0
 WITH_INTERCEPT = False  # D4
+INTERCEPT_DROPPED: dict[str, int] = {}
 IC = "aicc"
 
 FOURIER_PERIOD = 365.25
@@ -433,13 +434,38 @@ def run_candidate(name: str, y: pd.Series, X: pd.DataFrame,
             **bounds,
         )
     fits = list(out) if isinstance(out, (list, tuple)) else [out]
-    seen, uniq = set(), []
+
+    # D4 admissibility: only fits whose intercept setting matches the
+    # operative D4 outcome may enter the D5 visited-candidate pool.
+    admissible = []
     for f in fits:
+        if bool(getattr(f, "with_intercept", False)) != WITH_INTERCEPT:
+            INTERCEPT_DROPPED[name] = INTERCEPT_DROPPED.get(name, 0) + 1
+            continue
+        admissible.append(f)
+
+    INTERCEPT_DROPPED.setdefault(name, 0)
+
+    seen, uniq = set(), []
+    for f in admissible:
         key = (tuple(f.order), tuple(f.seasonal_order))
         if key not in seen:
             seen.add(key)
             uniq.append(f)
     recs = [record_from_fit(name, f) for f in uniq]
+
+    for r in recs:
+        expected = r.k_arma + r.n_exog + 1 + int(WITH_INTERCEPT)
+        if r.k_params_total != expected:
+            raise RuntimeError(
+                "fit ({},{},{},{}) has {} parameters, expected {} under "
+                "the operative D4 outcome (constant: {})".format(
+                    r.p, r.q, r.P, r.Q,
+                    r.k_params_total, expected,
+                    WITH_INTERCEPT,
+                )
+            )
+
     return recs, buf.getvalue()
 
 
@@ -883,6 +909,7 @@ def main() -> None:
             "visited_valid_fits": int(len(recs_df)),
             "lb_pass": int(recs_df["lb_pass"].sum()),
             "not_converged": int((recs_df["converged"] == False).sum()),
+            "intercept_fits_dropped_d4": int(sum(INTERCEPT_DROPPED.values())),
         },
         "estimation_sample": {"train_end": TRAIN_END, "n_train": N_TRAIN,
                               "nobs_effective": nobs_eff},
