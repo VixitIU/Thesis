@@ -32,7 +32,6 @@ import sys
 from pathlib import Path
 from typing import Any
 
-
 os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
 
 import mlflow
@@ -101,6 +100,7 @@ def log_artifact_if_exists(path: Path, artifact_path: str = "source_artifacts") 
 def tags_common(record: dict, source_json: Path, archive_key: str) -> dict[str, str]:
     return {
         "archive_backfill": "true",
+        "archive_complete": "false",
         "execution_recomputed": "false",
         "archive_key": archive_key,
         "source_json": str(source_json.resolve()),
@@ -127,7 +127,8 @@ def existing_archive_keys(client: MlflowClient, experiment_id: str) -> set[str]:
         max_results=5000,
     ):
         key = run.data.tags.get("archive_key")
-        if key:
+        complete = run.data.tags.get("archive_complete") == "true"
+        if key and complete:
             keys.add(key)
     return keys
 
@@ -205,8 +206,8 @@ def archive_d5(
             "order": sel["order"],
             "seasonal_order": sel["seasonal_order"],
             "with_intercept": sel["with_intercept"],
-            "d": hk.get("d"),
-            "D": hk.get("D"),
+            "diff_d": hk.get("d"),
+            "seasonal_D": hk.get("D"),
             "seasonal_m": hk.get("m"),
             "method": hk.get("method"),
             "maxiter": hk.get("maxiter"),
@@ -247,8 +248,13 @@ def archive_d5(
             log_artifact_if_exists(path, artifact_path="source_artifacts/traces")
 
         mlflow.set_tag("archival_note", "existing D5 outputs only; no refit performed")
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format(run_name, rec.get("run_utc")))
@@ -314,8 +320,13 @@ def archive_d11(
             "excluded_artifact",
             "d11_residuals.csv (residual-level/proprietary; not archived to MLflow)",
         )
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format("ARCHIVE D11 scale trigger", rec.get("run_utc")))
@@ -390,8 +401,13 @@ def archive_d12_d2(
             "excluded_artifact",
             "d12_d2_pilot_residuals.csv (reconstructive/proprietary; not archived to MLflow)",
         )
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format("ARCHIVE D12 D2 log1p", rec.get("run_utc")))
@@ -441,8 +457,13 @@ def archive_d12_d3(
         outdir = source_json.parent
         log_artifact_if_exists(outdir / "d12_d3_seasonal_differencing.json")
         log_artifact_if_exists(outdir / "d12_d3_report.md")
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format("ARCHIVE D12 D3 log1p", rec.get("run_utc")))
@@ -475,15 +496,15 @@ def archive_d12_d4(
             "row": "D4",
             "branch": "D12",
             "scale": "log1p",
-            "d": operative.get("d"),
-            "D": operative.get("D"),
+            "diff_d": operative.get("d"),
+            "seasonal_D": operative.get("D"),
             "with_intercept": d4.get("with_intercept"),
             "rule": d4.get("rule"),
             "source": d4.get("source"),
         })
         log_metrics_safe({
-            "d": operative.get("d"),
-            "D": operative.get("D"),
+            "diff_d": operative.get("d"),
+            "seasonal_D": operative.get("D"),
             "with_intercept": int(bool(d4.get("with_intercept"))),
         })
 
@@ -492,8 +513,13 @@ def archive_d12_d4(
             "archival_note",
             "D4 is mechanical and was recorded inside transformed D3; no separate estimation was run",
         )
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format("ARCHIVE D12 D4 log1p", rec.get("run_utc")))
@@ -575,8 +601,13 @@ def archive_convergence(
             "archival_note",
             "diagnostic only; source D5 selection unchanged",
         )
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print(
@@ -650,8 +681,13 @@ def archive_d7(
             "d7_pad_grid.csv",
         ):
             log_artifact_if_exists(outdir / name)
-    finally:
-        mlflow.end_run()
+    except Exception:
+        mlflow.set_tag("archive_complete", "false")
+        mlflow.end_run(status="FAILED")
+        raise
+    else:
+        mlflow.set_tag("archive_complete", "true")
+        mlflow.end_run(status="FINISHED")
 
     existing_keys.add(key)
     print("ADDED {:<30} {}".format("ARCHIVE D7 holiday pad", rec.get("run_utc")))
