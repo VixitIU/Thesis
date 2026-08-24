@@ -91,3 +91,48 @@ Accordingly, the D12 re-selection sequence is D2, D3, D4, D5 on log(y + 1). If t
 The execution order for Section D is therefore: D1, D2, D3, D4, D5, D11, (D12 if triggered, returning to D2, D3, D4 and D5 on log(y + 1)), D6 as applicable, D7, D8, D9, D10.
 
 **Effect on frozen values.** None. No threshold, candidate set, rule or criterion is altered. This addendum only makes explicit that D4, as a deterministic rule conditional on the selected differencing orders, is re-evaluated whenever D2 and D3 are re-run under D12.
+
+
+## Addendum 24 August 2026
+
+Numerical convergence treatment after transformed-scale D5
+
+Following the D11 scale trigger, D2-D5 were re-run on log(y + 1) as required by the 19 August 2026 addendum and the 23 August 2026 D4 clarification.
+
+**The transformed-scale D5 execution selected:**
+
+annual form: Fourier K = 6, period 365.25;
+ARIMA order: (1,1,1);
+weekly seasonal order: (1,0,1)[7];
+d = 1, D = 0;
+no constant under D4;
+AICc -16.420278432857387;
+Ljung–Box p-value 0.5016850482519739.
+
+The selected fit satisfied the frozen D5 Ljung–Box gate but did not report optimizer convergence under the implementation setting method='lbfgs', maxiter=50.
+
+A training-only, diagnostic refit was therefore performed on the exact D5-selected specification, holding the response scale, annual form, ARIMA orders, seasonal orders, regressors, intercept setting, estimation sample, optimizer method and all other model settings fixed. Only the numerical iteration ceiling was varied. Fresh fits produced:
+
+maxiter = 50   converged = False   AICc = -16.420278433
+maxiter = 100  converged = False   AICc = -21.999390116
+maxiter = 200  converged = True    AICc = -22.342805900
+maxiter = 500  converged = True    AICc = -22.342805900
+
+The 200- and 500-iteration fits converged to the same solution, with convergence reached after 127 iterations. The diagnostic therefore shows that the original non-convergence was attributable to the 50-iteration numerical ceiling for this specification rather than failure of the selected model to reach a stable optimum.
+
+**Clarification.** The D5 model-selection result remains unchanged. The transformed-scale M1 structure selected at D5 remains Fourier K = 6, ARIMA (1,1,1)(1,0,1)[7], with d = 1, D = 0 and no constant. The original D5 artifacts and recorded AICc are retained unchanged as the historical output of the D5 selection execution. The converged diagnostic AICc is not substituted into the D5 selection artifact, and D5 is not re-run or re-ranked.
+
+For downstream fixed-specification estimation beginning at D7, and for subsequent D8-D10 candidate fits and final model refits/forecast generation that inherit the D5-selected structure, the numerical optimizer setting is:
+
+method = 'lbfgs'
+maxiter = 500
+
+All other frozen or previously declared model-selection rules remain unchanged. Increasing maxiter is treated solely as a numerical estimation safeguard and not as a new model-selection criterion, candidate restriction, convergence filter, or fallback rule.
+
+Each downstream candidate fit is fitted under the same maxiter = 500 ceiling so that AICc comparisons within a decision row are made under a common numerical estimation setting. Convergence status is recorded for every fit.
+
+If a downstream fit still fails to report convergence at maxiter = 500, it is not automatically excluded, replaced, or assigned a fallback model. Execution is paused and the numerical issue is documented and resolved before the affected decision row is finalized. No additional optimizer, iteration ceiling, candidate exclusion rule, or model-selection rule may be introduced silently.
+
+This clarification was made before execution of D7 and uses training data only. No test-window observations or forecast-performance results were consulted.
+
+No frozen thresholds, candidate sets, hypothesis tests, AICc selection rules, Ljung-Box rules, differencing decisions, annual-form decisions, or D4 rules are changed by this addendum.
