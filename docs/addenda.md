@@ -136,3 +136,16 @@ If a downstream fit still fails to report convergence at maxiter = 500, it is no
 This clarification was made before execution of D7 and uses training data only. No test-window observations or forecast-performance results were consulted.
 
 No frozen thresholds, candidate sets, hypothesis tests, AICc selection rules, Ljung-Box rules, differencing decisions, annual-form decisions, or D4 rules are changed by this addendum.
+
+
+## Addendum 25 August 2026
+
+D8/D9 CCF identification clarification.
+
+The frozen instruction "CCF identification per Box et al. (2016)" is operationalized using Box-Jenkins prewhitening. 
+
+For each indicator, an auxiliary ARIMA filter is selected on the indicator values corresponding to the frozen 884-day training window only. The auxiliary search uses the D5 order bounds, weekly seasonal period s=7, stepwise AICc, d≤1, D≤1, KPSS for non-seasonal differencing, OCSB for seasonal differencing, and automatic intercept handling. 
+
+The selected fixed filter is then applied unchanged to the extended indicator history and to the operative transformed response; no response-side ARIMA model is separately estimated for CCF identification. Initial state-space observations are excluded according to the model-reported likelihood burn. If the selected prewhitening filter fails to converge, execution pauses before lag screening. 
+
+The five candidate lags are selected by the largest absolute prewhitened CCF values; raw CCF values are diagnostic only. This clarification does not alter the frozen candidate lag ranges, number of screened lags, Stage-2 AICc rule, or shorter-lag tie rule.
