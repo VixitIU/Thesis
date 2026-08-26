@@ -149,3 +149,73 @@ For each indicator, an auxiliary ARIMA filter is selected on the indicator value
 The selected fixed filter is then applied unchanged to the extended indicator history and to the operative transformed response; no response-side ARIMA model is separately estimated for CCF identification. Initial state-space observations are excluded according to the model-reported likelihood burn. If the selected prewhitening filter fails to converge, execution pauses before lag screening. 
 
 The five candidate lags are selected by the largest absolute prewhitened CCF values; raw CCF values are diagnostic only. This clarification does not alter the frozen candidate lag ranges, number of screened lags, Stage-2 AICc rule, or shorter-lag tie rule.
+
+
+## Addendum 26 August 2026 
+
+D9 search-vintage check and numerical conditioning.
+
+This addendum is adopted prospectively before the operative D9 search-lag
+selection. It does not alter the frozen D9 candidate set, screening rule,
+AICc rule, tie rule, inherited M1 specification, or convergence policy.
+
+### D9 C3-4 publication-vintage implementation
+
+The frozen search-lag candidates remain exactly:
+
+28, 35, 42, ..., 119 days.
+
+The search indicator is weekly and step-expanded to daily observations.
+C3-4 requires that a week's value enter only from its publication date and
+that the observed publication delay be recorded.
+
+For the implementation check, publication delay is measured in days from
+the END of the represented week to the date on which that week's value
+became available. A seven-day week ends six days after its first day.
+Accordingly, the conservative all-weekday availability requirement is:
+
+    lag >= 6 + observed publication delay
+
+This availability check is separate from the frozen seven-day lag grid.
+The value 6 does not change the lag increment or candidate set.
+
+If any frozen candidate would violate the recorded publication-vintage
+constraint, D9 pauses. The candidate set is not narrowed or altered
+automatically.
+
+### D9 Stage-2 search-regressor scaling
+
+Stage-1 prewhitening and CCF screening use the original frozen
+`search_index` values without rescaling.
+
+Only after the five D9 candidate lags have been selected by the frozen CCF
+screening rule, the search regressor used in the Stage-2 M4 AICc fits is
+expressed in thousands of queries:
+
+    search_index_scaled = search_index / 1000
+
+This is a numerical-conditioning measure for the exogenous regression
+coefficient. It is an exact reparameterisation:
+
+    X* = X / 1000
+    beta* = 1000 beta
+
+so beta* X* = beta X.
+
+At the same optimum this leaves fitted values, likelihood, parameter count,
+AICc and forecasts unchanged. It changes only the numerical scale and
+interpretation of the search coefficient.
+
+Therefore this clarification changes none of the following:
+
+- the D9 candidate lags 28, 35, ..., 119;
+- the five-candidate prewhitened-CCF screening rule;
+- the shorter-lag tie rule;
+- the operative M1 orders or annual form;
+- the D9 AICc selection criterion;
+- the downstream convergence rule.
+
+D10 inherits the D9-selected search lag without re-tuning and uses the same
+Stage-2 search-regressor scaling when that inherited regressor is included.
+
+Operative protocol state after this addendum: `protocol-v1.6`.
