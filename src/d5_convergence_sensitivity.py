@@ -302,7 +302,8 @@ def main() -> None:
             X=X.to_numpy(dtype=float),
         )
 
-      
+        # Reuse D5's exact AICc / burn-in / Ljung-Box implementation so the
+        # diagnostic does not create a second interpretation of the gate.
         rec = d5.record_from_fit(candidate, model)
         elapsed = time.time() - t0
 
@@ -541,7 +542,7 @@ def main() -> None:
     }
 
     json_path = outdir / "d5_convergence_sensitivity.json"
-    json_path.write_text(json.dumps(out, indent=2))
+    json_path.write_text(json.dumps(out, indent=2), encoding="utf-8")
 
     # ------------------------------- report ----------------------------------
     L = []
@@ -696,7 +697,7 @@ def main() -> None:
     )
 
     report_path = outdir / "d5_convergence_sensitivity_report.md"
-    report_path.write_text("\n".join(L) + "\n")
+    report_path.write_text("\n".join(L) + "\n", encoding="utf-8")
 
     # ------------------------------- MLflow ----------------------------------
     project_root = Path(__file__).resolve().parents[1]
