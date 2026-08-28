@@ -1,3 +1,6 @@
+-- Extract daily case counts from the proprietary source database
+-- Used to construct the dependent variable for the thesis analysis
+
 WITH ru_policy_ids(id) AS (
   SELECT unnest(ARRAY[
     '00d3ee16-b7e5-4118-a155-d39fc701fa4b', '0f18c4dc-eacd-4bee-b6b6-f08eb5c963d2', '0fa468c0-eb07-4417-be08-f4054ae9fbc7',
