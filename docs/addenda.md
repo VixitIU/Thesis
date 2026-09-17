@@ -240,7 +240,7 @@ status only.
 **Background.** The transformed-scale D5 execution ran the stepwise search
 under method='lbfgs', maxiter = 50. The selected fit did not report
 optimizer convergence at that ceiling, and non-convergence was not confined
-to it: [n] of the [N] visited fits are flagged non-converged in the recorded
+to it: [56] of the [123] visited fits are flagged non-converged in the recorded
 visited-fits table. Two training-only diagnostics followed: the 24 August
 2026 exact-specification refit of the selected model at higher iteration
 budgets, and the subsequent convergence-sensitivity refit of the seven
