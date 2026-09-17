@@ -65,8 +65,12 @@ Recorded implementation choices (repeated in the generated report)
      count, then fixed candidate order, then (p, q, P, Q).
   6. error_action='ignore'; per-fit optimizer convergence is logged and
      a loud warning is raised if the SELECTED fit did not converge.
-     maxiter is left at pmdarima's default (50) rather than introducing
-     an untracked knob.
+     maxiter defaults to pmdarima's default (50), the setting of the
+     historical executions. --maxiter 500 executes the full re-run of
+     the transformed-scale selection under the common downstream
+     ceiling per the addendum of 17 September 2026; the value used is
+     recorded in hk_settings, the report and MLflow, so the knob is
+     tracked, not silent.
 
 Environment
 -----------
@@ -86,7 +90,7 @@ Usage
 -----
 python d5_baseline_order_selection.py --data path/to/daily_counts.csv \
     [--date-col date] [--y-col billed_visits] [--outdir results/d5] \
-    [--mlflow] [--mlflow-experiment thesis-baselines]
+    [--maxiter 500] [--mlflow] [--mlflow-experiment thesis-baselines]
 
 --smoke runs a reduced, NON-PROTOCOL configuration (lower order caps,
 lower maxiter) for pipeline testing on synthetic data only. Never use
@@ -118,16 +122,23 @@ from statsmodels.stats.diagnostic import acorr_ljungbox
 # ------------------------------ frozen constants -----------------------------
 # Provenance: protocol-v1.0 is the freeze tag of the signed protocol
 # document (frozen 19 August 2026). 
-# Three addenda have subsequently been filed before any test-window forecast:
+# Seven addenda have subsequently been filed before any test-window forecast:
 #
 #   19 Aug 2026 -- D11/D12/D13 execution-order clarification
 #   20 Aug 2026 -- D8/D9 inheritance clarification
 #   23 Aug 2026 -- D4 reapplication under the D12 log-scale branch
+#   24 Aug 2026 -- numerical convergence treatment; maxiter = 500 declared
+#                  as the common downstream ceiling
+#   25 Aug 2026 -- D8/D9 CCF prewhitening operationalization
+#   26 Aug 2026 -- D9 search-vintage check and numerical conditioning
+#   17 Sep 2026 -- full re-execution of the transformed-scale D5 selection
+#                  under maxiter = 500; the re-executed selection is the
+#                  operative D5 result
 #
-# The operative protocol state after the third addendum is protocol-v1.3.
+# The operative protocol state after the latest addendum is protocol-v1.7.
 
 PROTOCOL_FREEZE_TAG = "protocol-v1.0"
-PROTOCOL_TAG = "protocol-v1.3"
+PROTOCOL_TAG = "protocol-v1.7"
 ROW = "D5"
 FALLBACK_ROW = "D6"
 
@@ -590,10 +601,16 @@ def write_report(outdir: Path, selection: dict, winners: pd.DataFrame,
              "parameter count, then fixed candidate order ({}), then "
              "(p, q, P, Q).".format(", ".join(CANDIDATE_ORDER)))
     mi = selection["hk_settings"]["maxiter"]
+    if selection["smoke_mode"]:
+        mi_note = " (NON-DEFAULT, smoke override)"
+    elif mi == MAXITER:
+        mi_note = " (pmdarima default; historical D5 setting)"
+    else:
+        mi_note = (" (common numerical ceiling per the addendum of "
+                   "17 September 2026; the full stepwise search was "
+                   "re-executed under this setting)")
     L.append("6. error_action='ignore'; optimizer convergence logged per "
-             "fit; maxiter = {}{}.".format(
-                 mi, " (pmdarima default)" if mi == MAXITER else
-                 " (NON-DEFAULT, smoke override)"))
+             "fit; maxiter = {}{}.".format(mi, mi_note))
     L.append("")
     L.append("## Selection")
     L.append("")
@@ -656,7 +673,12 @@ def log_mlflow(args, selection: dict, outdir: Path) -> None:
 
     mlflow.set_experiment(args.mlflow_experiment)
     hk = selection["hk_settings"]
-    run_name = "D5_smoke" if selection["smoke_mode"] else "D5"
+    if selection["smoke_mode"]:
+        run_name = "D5_smoke"
+    elif int(hk["maxiter"]) != MAXITER:
+        run_name = "D5_maxiter{}".format(hk["maxiter"])
+    else:
+        run_name = "D5"
     with mlflow.start_run(run_name=run_name):
         params = {
             "protocol_tag": selection["protocol_tag"],
@@ -709,6 +731,13 @@ def main() -> None:
     ap.add_argument("--smoke", action="store_true",
                     help="reduced NON-PROTOCOL config for pipeline testing "
                          "on synthetic data only")
+    ap.add_argument("--maxiter", type=int, default=None,
+                    help="LBFGS iteration ceiling applied to every fit in "
+                         "the stepwise search. Omitted: the historical "
+                         "default MAXITER = 50. 500 executes the full D5 "
+                         "re-run required by the addendum of 17 September "
+                         "2026. Recorded in hk_settings, the report and "
+                         "MLflow. Forbidden with --smoke.")
     ap.add_argument("--scale", choices=["count", "log1p"], default="count",
                     help="modelling scale. 'count' is the default D5 run. "
                          "'log1p' implements the D12 branch of the "
@@ -773,7 +802,12 @@ def main() -> None:
     digest = sha256_of(data_path)
 
     bounds = dict(HK_BOUNDS)
-    maxiter = MAXITER
+    if args.smoke and args.maxiter is not None:
+        sys.exit("--maxiter is a protocol setting (addendum of "
+                 "17 September 2026) and cannot be combined with --smoke.")
+    if args.maxiter is not None and args.maxiter < 1:
+        sys.exit("--maxiter must be a positive integer.")
+    maxiter = MAXITER if args.maxiter is None else int(args.maxiter)
     candidates = list(CANDIDATE_ORDER)
     if args.smoke:
         bounds.update(max_p=2, max_q=2, max_P=1, max_Q=1)
