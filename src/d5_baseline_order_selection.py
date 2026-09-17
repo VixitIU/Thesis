@@ -90,7 +90,7 @@ Usage
 -----
 python d5_baseline_order_selection.py --data path/to/daily_counts.csv \
     [--date-col date] [--y-col billed_visits] [--outdir results/d5] \
-    [--maxiter 500] [--mlflow] [--mlflow-experiment thesis-baselines]
+    [--mlflow] [--mlflow-experiment medical-assistance-demand-forecasting]
 
 --smoke runs a reduced, NON-PROTOCOL configuration (lower order caps,
 lower maxiter) for pipeline testing on synthetic data only. Never use
@@ -691,7 +691,15 @@ def log_mlflow(args, selection: dict, outdir: Path) -> None:
             "smoke_mode": selection["smoke_mode"],
             "scale": selection["scale"],
         }
-        params.update(hk)
+        # MLflow FileStore writes one file per param key; on a
+        # case-insensitive filesystem (Windows) the seasonal HK keys
+        # start_P/start_Q/max_P/max_Q/D collide with their lowercase
+        # nonseasonal counterparts. Disambiguate for logging only; the
+        # hk_settings block in d5_selection.json is unchanged.
+        hk_logged = dict(hk)
+        for _k in ("start_P", "start_Q", "max_P", "max_Q", "D"):
+            hk_logged[_k + "_seasonal"] = hk_logged.pop(_k)
+        params.update(hk_logged)
         mlflow.log_params(params)
         metrics = {
             "n_visited": selection["counts"]["visited_valid_fits"],
@@ -727,7 +735,8 @@ def main() -> None:
     )
     ap.add_argument("--outdir", default="results/d5")
     ap.add_argument("--mlflow", action="store_true")
-    ap.add_argument("--mlflow-experiment", default="thesis-baselines")
+    ap.add_argument("--mlflow-experiment",
+                    default="medical-assistance-demand-forecasting")
     ap.add_argument("--smoke", action="store_true",
                     help="reduced NON-PROTOCOL config for pipeline testing "
                          "on synthetic data only")

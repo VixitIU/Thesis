@@ -318,7 +318,8 @@ def main() -> None:
     ap.add_argument("--selection", required=True,
                     help="path to the operative d5_selection.json")
     ap.add_argument("--outdir", default="results/d8")
-    ap.add_argument("--experiment", default="thesis-baselines")
+    ap.add_argument("--experiment",
+                    default="medical-assistance-demand-forecasting")
     ap.add_argument("--no-mlflow", action="store_true")
     ap.add_argument("--allow-env-mismatch", action="store_true")
     args = ap.parse_args()
