@@ -85,10 +85,12 @@ EXPECTED_COUNTS = {("H_NY", "train"): 2, ("H_OT", "train"): 9,
                    ("H_NY", "test"): 1, ("H_OT", "test"): 5}
 MIN_CLUSTER_LEN = 3                       # C1-6
 
-# 24 Aug 2026 addendum. D5's own ceiling (50) is unchanged; this governs
-# fixed-specification estimation from D7 onward.
-PROTOCOL_TAG = "protocol-v1.4"
-SOURCE_D5_PROTOCOL_TAG = "protocol-v1.3"
+# 24 Aug 2026 addendum governs fixed-specification estimation from D7
+# onward. Per the 17 Sep 2026 addendum (protocol-v1.7), D5 itself was
+# re-executed in full under the same maxiter = 500 ceiling; the
+# re-executed selection is the operative M1 source for this row.
+PROTOCOL_TAG = "protocol-v1.7"
+SOURCE_D5_PROTOCOL_TAG = "protocol-v1.7"
 
 DOWNSTREAM_METHOD = "lbfgs"
 DOWNSTREAM_MAXITER = 500

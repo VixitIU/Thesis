@@ -143,13 +143,13 @@ FROZEN_HISTORY_SHA256 = (
     "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99"
 )
 
-PROTOCOL_TAG = "protocol-v1.6"
+PROTOCOL_TAG = "protocol-v1.7"
 
 # Lineage pin, as at D7: the operative M1 must be the artifact produced by
-# the transformed-scale D5 execution under protocol-v1.3, not a later
-# re-run. Any legitimate re-execution of D5 under a later state requires
-# this constant to be updated deliberately.
-SOURCE_D5_PROTOCOL_TAG = "protocol-v1.3"
+# the operative D5 execution. Updated deliberately per the 17 Sep 2026
+# addendum (protocol-v1.7): D5 was re-executed in full under maxiter = 500
+# and the re-executed selection supersedes the protocol-v1.3 artifact.
+SOURCE_D5_PROTOCOL_TAG = "protocol-v1.7"
 
 
 def sha256_of(path: Path) -> str:

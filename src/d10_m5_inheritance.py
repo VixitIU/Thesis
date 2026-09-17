@@ -89,15 +89,17 @@ except ImportError:
 
 # ----------------------------- frozen constants ------------------------------
 ROW = "D10"
-PROTOCOL_TAG = "protocol-v1.6"
+PROTOCOL_TAG = "protocol-v1.7"
 
-# Historical row provenance is intentional: each source artifact must be the
-# operative artifact actually selected under the protocol state in force when
-# that row was executed.
-SOURCE_D5_PROTOCOL_TAG = "protocol-v1.3"
-SOURCE_D7_PROTOCOL_TAG = "protocol-v1.4"
-SOURCE_D8_PROTOCOL_TAG = "protocol-v1.5"
-SOURCE_D9_PROTOCOL_TAG = "protocol-v1.6"
+# Row provenance: each source artifact must be the operative artifact for
+# the protocol state in force. Per the 17 Sep 2026 addendum
+# (protocol-v1.7), D5 was re-executed in full under maxiter = 500 and
+# D7-D9 are re-executed under the resulting operative M1, so every source
+# row carries the protocol-v1.7 stamp.
+SOURCE_D5_PROTOCOL_TAG = "protocol-v1.7"
+SOURCE_D7_PROTOCOL_TAG = "protocol-v1.7"
+SOURCE_D8_PROTOCOL_TAG = "protocol-v1.7"
+SOURCE_D9_PROTOCOL_TAG = "protocol-v1.7"
 
 DOWNSTREAM_MAXITER = 500
 DOWNSTREAM_METHOD = "lbfgs"

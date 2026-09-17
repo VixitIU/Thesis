@@ -115,7 +115,10 @@ FROZEN_HISTORY_SHA256 = (
     "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99"
 )
 
-PROTOCOL_TAG = "protocol-v1.5"
+# Re-executed under the 17 Sep 2026 addendum (protocol-v1.7): the
+# operative M1 is the full maxiter-500 D5 re-selection. Row rules
+# unchanged.
+PROTOCOL_TAG = "protocol-v1.7"
 
 
 def sha256_of(path: Path) -> str:
