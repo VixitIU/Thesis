@@ -1,0 +1,147 @@
+{
+  "protocol_tag": "protocol-v1.7",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "source_d5_protocol_tag": "protocol-v1.7",
+  "row": "D8",
+  "scale": "log1p",
+  "operative_m1": {
+    "source_selection": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d5_log1p_maxiter500\\d5_selection.json",
+    "candidate": "fourier_K1",
+    "order": [
+      0,
+      1,
+      2
+    ],
+    "seasonal_order": [
+      0,
+      0,
+      0,
+      7
+    ],
+    "with_intercept": false
+  },
+  "candidate_lags": {
+    "min": 28,
+    "max": 90,
+    "n": 63
+  },
+  "stage1_ccf": {
+    "method": "prewhitened cross-correlation (Box et al. 2016)",
+    "filter": {
+      "order": [
+        0,
+        1,
+        1
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        0,
+        7
+      ],
+      "with_intercept": false,
+      "information_criterion": "aicc",
+      "aicc": -4325.018114268526,
+      "converged": true,
+      "iterations": 2,
+      "method": "lbfgs",
+      "maxiter": 500,
+      "d_test": "kpss",
+      "D_test": "ocsb",
+      "max_d": 1,
+      "max_D": 1,
+      "seasonal": true,
+      "seasonal_period": 7,
+      "estimation_start": "2023-07-01",
+      "estimation_end": "2025-11-30",
+      "n_estimation": 884,
+      "fx_application_start": "2023-03-04",
+      "fx_application_end": "2025-11-30",
+      "burn_in_fx": 1,
+      "burn_in_response": 1,
+      "ccf_response_start": "2023-07-02",
+      "ccf_response_end": "2025-11-30",
+      "n_ccf_response": 883,
+      "parameter_names": [
+        "ma.L1",
+        "sigma2"
+      ]
+    },
+    "filter_choice_note": "not fixed by the frozen row; auxiliary FX ARIMA estimated on the frozen training window only using D5 stepwise bounds, s = 7, d <= 1, D <= 1, KPSS/OCSB differencing tests and automatic intercept handling; the fixed fitted state-space filter is then applied to extended FX history and response",
+    "selected_lags": [
+      45,
+      84,
+      87,
+      43,
+      33
+    ],
+    "raw_ccf_top5_diagnostic": [
+      61,
+      62,
+      63,
+      64,
+      65
+    ],
+    "raw_ccf_agrees": false
+  },
+  "stage2_aicc": {
+    "lags": [
+      84,
+      33,
+      43,
+      45,
+      87
+    ],
+    "aicc": [
+      -13.432552729041042,
+      -13.399132516951308,
+      -11.200197175414491,
+      -10.399031193350023,
+      -9.941679405384878
+    ]
+  },
+  "selected_lag": {
+    "lag": 84,
+    "aicc": -13.432552729041042,
+    "margin_over_runner_up": 0.03342021208973378,
+    "ccf_prewhitened": -0.06861367182912227,
+    "screen_rank": 2,
+    "converged": true
+  },
+  "tie_rule": "tie to shorter lag (frozen D8), applied at both stages",
+  "optimizer": {
+    "method": "lbfgs",
+    "maxiter": 500,
+    "source": "24 Aug 2026 addendum"
+  },
+  "e6_check": "every candidate lag >= 28 days = the longest horizon, so all regressor values predate the origin",
+  "next_step": "M3 = M1 + FX at lag 84; D10 transfers this lag to M5 without re-tuning.",
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "history": {
+    "path": "data\\indicator_history.csv",
+    "sha256": "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99"
+  },
+  "run_utc": "2026-09-17T10:39:27+00:00"
+}
