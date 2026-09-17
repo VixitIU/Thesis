@@ -219,3 +219,108 @@ D10 inherits the D9-selected search lag without re-tuning and uses the same
 Stage-2 search-regressor scaling when that inherited regressor is included.
 
 Operative protocol state after this addendum: `protocol-v1.6`.
+
+
+
+## Addendum 17 September 2026
+
+Full re-execution of the transformed-scale D5 selection under maxiter = 500.
+
+**Rows affected:** D5 (numerical re-execution of the transformed-scale
+selection); D7-D10 conditionally, only if the re-executed selection differs
+from the recorded one. No frozen candidate set, search bound, criterion,
+gate, tie-break or threshold is altered.
+
+**Status:** Filed before any test-window forecast was produced; Section E
+has not been executed and no test-window observation or forecast-performance
+result was consulted. Prompted by supervisor review (17 September 2026) of
+the convergence documentation, i.e. by training-window numerical convergence
+status only.
+
+**Background.** The transformed-scale D5 execution ran the stepwise search
+under method='lbfgs', maxiter = 50. The selected fit did not report
+optimizer convergence at that ceiling, and non-convergence was not confined
+to it: [n] of the [N] visited fits are flagged non-converged in the recorded
+visited-fits table. Two training-only diagnostics followed: the 24 August
+2026 exact-specification refit of the selected model at higher iteration
+budgets, and the subsequent convergence-sensitivity refit of the seven
+recorded per-candidate winner specifications at maxiter = 500. Neither
+re-runs the search itself. An interrupted LBFGS fit records the
+log-likelihood of an intermediate iterate of the same descent path, so its
+recorded AICc is not smaller than the converged value for that
+specification, as the 24 August table shows for the selected specification
+(-16.42 recorded at maxiter = 50 against -22.34 converged). Non-convergence
+at maxiter = 50 can therefore have distorted both the AICc values steering
+each candidate's stepwise walk (which orders were visited at all) and the
+AICc values compared across candidates. Refitting only recorded
+specifications cannot confirm the original AICc ranking or the Fourier
+K = 6 annual-form choice. The decision was made for the
+D5 candidates to be re-estimated under the common 500-iteration setting.
+
+**Resolution.**
+
+1. The transformed-scale D5 selection is re-executed in full: the complete
+Hyndman-Khandakar stepwise search for each of the seven frozen annual-form
+candidates (monthly, fourier_K1 ... fourier_K6), on log(y + 1) with d = 1,
+D = 0 and no constant per the recorded transformed-scale D2-D4 outcomes, on
+the frozen 884-day training sample, under the D1 environment, with
+method = 'lbfgs' and maxiter = 500 applied identically to every fit in the
+search. maxiter is the only setting that differs from the recorded
+transformed-scale execution. The visited-set Ljung-Box gate, the D6
+fallback, the deterministic tie-break and every other frozen or previously
+declared D5 rule apply unchanged.
+
+2. The selection produced by this re-execution is the operative D5 result
+and the operative M1 structure for all downstream rows. The provision of
+the 24 August 2026 addendum that "D5 is not re-run or re-ranked" is
+superseded on supervisor instruction. Every other provision of that
+addendum remains in force: the recorded artifacts are retained unchanged as
+historical record with no value substituted into them, the maxiter = 500
+downstream ceiling stands, convergence status is recorded for every fit,
+and a fit failing to report convergence at maxiter = 500 is not silently
+excluded, replaced or assigned a fallback. That last rule extends to this
+re-execution: if any visited fit, and in particular the selected fit, does
+not report convergence at maxiter = 500, execution pauses and the numerical
+issue is documented and resolved before D5 is finalized. No additional
+optimizer, iteration ceiling, exclusion rule or selection rule may be
+introduced silently.
+
+3. Conditional consequences. If the re-executed selection reproduces the
+recorded structure (fourier_K6, ARIMA(1,1,1)(1,0,1)[7], d = 1, D = 0, no
+constant), the K = 6 choice and the AICc ranking are confirmed; the
+completed D7-D10 rows, which were estimated at maxiter = 500 under that
+inherited structure, stand without re-execution, and Section E proceeds. If
+the re-executed selection differs in any element, it becomes the operative
+M1 and D7-D10 are re-executed in protocol order under the unchanged frozen
+rules with the new operative M1, before Section E. The D11 scale decision
+is not reopened in either case: the trigger was evaluated per the
+19 August 2026 addendum and the supervisor has accepted the log(y + 1)
+switch as following the pre-specified rule. The count-scale D5 execution
+is likewise not reopened; its artifacts remain the historical count-scale
+record.
+
+4. Artifacts. The re-execution writes the standard D5 artifact set
+(visited-fits table with per-fit convergence status, per-candidate winners,
+selection JSON, per-candidate stepwise traces, run report) to a separate
+directory, results/d5_log1p_maxiter500/, leaving the recorded artifacts
+untouched, and is logged to the project MLflow store with Git state. The
+input data SHA-256 must equal the digest recorded in the operative
+transformed-scale d5_selection.json. The re-executed per-candidate winner
+table, its comparison to the recorded 24 August table, and per-fit
+convergence counts are reported in the thesis.
+
+5. Finality. Once the re-execution (and, if triggered, the conditional
+D7-D10 re-execution) is complete and documented, the model selection is
+final and Section E proceeds; no further addendum may alter the selection
+thereafter, per the Section E2 admissibility rule.
+
+**Effect on frozen values.** None. The candidate set, search bounds,
+information criterion, Ljung-Box gate and lag rule, D6 fallback, tie-break,
+training window and scale rules are unchanged. maxiter is a numerical
+estimation setting, recorded as an implementation choice rather than a
+frozen threshold; raising it to the previously declared common ceiling of
+500 for this re-execution is, per the 24 August 2026 addendum, a numerical
+estimation safeguard and not a new model-selection criterion, candidate
+restriction, convergence filter or fallback rule.
+
+Operative protocol state after this addendum: `protocol-v1.7`.
