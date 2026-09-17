@@ -219,6 +219,11 @@ def main() -> None:
                     help="path to the operative d5_selection.json")
     ap.add_argument("--outdir", default="results/d7")
     ap.add_argument("--allow-env-mismatch", action="store_true")
+    ap.add_argument("--experiment",
+                    default="medical-assistance-demand-forecasting")
+    ap.add_argument("--no-mlflow", action="store_true",
+                    help="skip MLflow logging (artifacts are still written "
+                         "to --outdir and can be archived retrospectively)")
     args = ap.parse_args()
     args.d = None
     args.D_seasonal = None
@@ -533,6 +538,56 @@ def main() -> None:
              "is produced: the windows are calendar-derived and the table "
              "carries only AICc values and day counts.")
     (outdir / "d7_report.md").write_text("\n".join(L) + "\n")
+
+    if not args.no_mlflow:
+        try:
+            import os
+            os.environ.setdefault("MLFLOW_ALLOW_FILE_STORE", "true")
+            import mlflow
+            mlflow.set_experiment(args.experiment)
+            with mlflow.start_run(run_name="D7_{}".format(sel["scale"])):
+                mlflow.set_tags({
+                    "protocol.row": ROW,
+                    "protocol.tag": PROTOCOL_TAG,
+                    "protocol.freeze_tag": d5.PROTOCOL_FREEZE_TAG,
+                    "source_d5_protocol_tag": sel["protocol_tag"],
+                    "archive_backfill": "false",
+                    "execution_recomputed": "true",
+                    "protocol.run_utc": out["run_utc"],
+                    "data_sha256": digest,
+                    "cluster_sha256": cluster_digest,
+                    "smoke_mode": str(out["smoke_mode"]),
+                })
+                mlflow.log_params({
+                    "scale": sel["scale"],
+                    "pad_grid": str(list(PAD_GRID)),
+                    "n_pads": len(rows),
+                    "maxiter": DOWNSTREAM_MAXITER,
+                    "method": DOWNSTREAM_METHOD,
+                    "m1_candidate": cand,
+                    "m1_order": str(sel["selected"]["order"]),
+                    "m1_seasonal_order": str(
+                        sel["selected"]["seasonal_order"]),
+                    "m1_with_intercept": str(
+                        sel["selected"]["with_intercept"]),
+                })
+                mlflow.log_metrics({
+                    "selected_b": float(b_sel),
+                    "selected_f": float(f_sel),
+                    "selected_aicc": float(best["aicc"]),
+                    "margin_over_runner_up": margin,
+                    "m1_no_holidays_aicc": float(m1["aicc"]),
+                    "days_H_NY": float(best["days_H_NY"]),
+                    "days_H_OT": float(best["days_H_OT"]),
+                })
+                for _f in ("d7_pad_grid.csv", "d7_pad_selection.json",
+                           "d7_report.md"):
+                    mlflow.log_artifact(str(outdir / _f))
+            print("logged to MLflow experiment '{}'".format(args.experiment))
+        except Exception as exc:
+            print("WARNING: MLflow logging failed ({}). The run artifacts "
+                  "are complete on disk and can be archived "
+                  "retrospectively.".format(exc))
 
     print("")
     print("D7 SELECTION: (b, f) = ({}, {}), AICc {:.4f} "
