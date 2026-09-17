@@ -695,7 +695,7 @@ def main() -> None:
                     "filter_with_intercept": str(
                         filt_info["with_intercept"]),
                     "filter_d_test": filt_info["d_test"],
-                    "filter_D_test": filt_info["D_test"],
+                    "filter_D_seasonal_test": filt_info["D_test"],
                     "filter_estimation_start":
                         filt_info["estimation_start"],
                     "filter_estimation_end": filt_info["estimation_end"],
