@@ -1,0 +1,45 @@
+Performing stepwise search to minimize aicc
+ ARIMA(2,1,2)(1,0,1)[7]             : AICC=-13.020, Time=3.96 sec
+First viable model found (-13.020)
+ ARIMA(0,1,0)(0,0,0)[7]             : AICC=386.033, Time=0.63 sec
+ ARIMA(1,1,0)(1,0,0)[7]             : AICC=220.048, Time=1.83 sec
+ ARIMA(0,1,1)(0,0,1)[7]             : AICC=-2.778, Time=1.42 sec
+ ARIMA(2,1,2)(0,0,1)[7]             : AICC=-8.368, Time=3.42 sec
+ ARIMA(2,1,2)(1,0,0)[7]             : AICC=-8.463, Time=3.08 sec
+ ARIMA(2,1,2)(2,0,1)[7]             : AICC=-6.174, Time=5.67 sec
+ ARIMA(2,1,2)(1,0,2)[7]             : AICC=-5.524, Time=5.91 sec
+ ARIMA(2,1,2)(0,0,0)[7]             : AICC=-8.099, Time=1.79 sec
+ ARIMA(2,1,2)(0,0,2)[7]             : AICC=-6.547, Time=5.77 sec
+ ARIMA(2,1,2)(2,0,0)[7]             : AICC=-6.676, Time=5.68 sec
+Near non-invertible roots for order (2, 1, 2)(2, 0, 2, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.997)
+ ARIMA(2,1,2)(2,0,2)[7]             : AICC=inf, Time=6.44 sec
+ ARIMA(1,1,2)(1,0,1)[7]             : AICC=-5.946, Time=3.48 sec
+Near non-invertible roots for order (2, 1, 1)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.995)
+ ARIMA(2,1,1)(1,0,1)[7]             : AICC=inf, Time=3.36 sec
+ ARIMA(3,1,2)(1,0,1)[7]             : AICC=-9.117, Time=3.99 sec
+ ARIMA(2,1,3)(1,0,1)[7]             : AICC=-4.565, Time=3.84 sec
+ ARIMA(1,1,1)(1,0,1)[7]             : AICC=-16.421, Time=3.19 sec
+New best model found (-16.421 < -13.020)
+ ARIMA(1,1,1)(0,0,1)[7]             : AICC=-9.485, Time=1.76 sec
+ ARIMA(1,1,1)(1,0,0)[7]             : AICC=-9.550, Time=1.79 sec
+Near non-invertible roots for order (1, 1, 1)(2, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.992)
+ ARIMA(1,1,1)(2,0,1)[7]             : AICC=inf, Time=4.77 sec
+ ARIMA(1,1,1)(1,0,2)[7]             : AICC=-11.932, Time=5.27 sec
+ ARIMA(1,1,1)(0,0,0)[7]             : AICC=-10.488, Time=1.23 sec
+ ARIMA(1,1,1)(0,0,2)[7]             : AICC=-8.051, Time=3.35 sec
+ ARIMA(1,1,1)(2,0,0)[7]             : AICC=-8.199, Time=3.16 sec
+Near non-invertible roots for order (1, 1, 1)(2, 0, 2, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.997)
+ ARIMA(1,1,1)(2,0,2)[7]             : AICC=inf, Time=5.69 sec
+Near non-invertible roots for order (0, 1, 1)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.997)
+ ARIMA(0,1,1)(1,0,1)[7]             : AICC=inf, Time=3.08 sec
+Near non-invertible roots for order (1, 1, 0)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.996)
+ ARIMA(1,1,0)(1,0,1)[7]             : AICC=inf, Time=2.83 sec
+ ARIMA(0,1,0)(1,0,1)[7]             : AICC=390.149, Time=0.34 sec
+Near non-invertible roots for order (0, 1, 2)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.991)
+ ARIMA(0,1,2)(1,0,1)[7]             : AICC=inf, Time=3.25 sec
+Near non-invertible roots for order (2, 1, 0)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.997)
+ ARIMA(2,1,0)(1,0,1)[7]             : AICC=inf, Time=3.04 sec
+ ARIMA(1,1,1)(1,0,1)[7] intercept   : AICC=-6.197, Time=3.21 sec
+
+Best model:  ARIMA(1,1,1)(1,0,1)[7]          
+Total fit time: 106.239 seconds

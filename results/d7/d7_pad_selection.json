@@ -1,0 +1,118 @@
+{
+  "protocol_tag": "protocol-v1.4",
+  "source_d5_protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D7",
+  "scale": "log1p",
+  "operative_m1": {
+    "source_selection": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d12_d5\\d5_selection.json",
+    "candidate": "fourier_K6",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      1,
+      7
+    ],
+    "with_intercept": false,
+    "annual_columns": [
+      "fourier_sin1",
+      "fourier_cos1",
+      "fourier_sin2",
+      "fourier_cos2",
+      "fourier_sin3",
+      "fourier_cos3",
+      "fourier_sin4",
+      "fourier_cos4",
+      "fourier_sin5",
+      "fourier_cos5",
+      "fourier_sin6",
+      "fourier_cos6"
+    ]
+  },
+  "pad_grid": {
+    "set": [
+      2,
+      3,
+      4
+    ],
+    "n_pads": 9,
+    "shared_by_both_groups": true
+  },
+  "selected_pad": {
+    "b": 3,
+    "f": 2,
+    "aicc": -20.093800911117313,
+    "converged": true,
+    "iterations": 139,
+    "days_H_NY": 31,
+    "days_H_OT": 75,
+    "overlap_days_absorbed_by_union": {
+      "H_NY": 0,
+      "H_OT": 2
+    },
+    "margin_over_runner_up": 0.13247283981861102
+  },
+  "regressor_construction": {
+    "window": "[start - b, end + f] inclusive",
+    "groups": [
+      "H_NY",
+      "H_OT"
+    ],
+    "overlap": "union, binary; overlapping windows never summed (C1-10)",
+    "columns": [
+      "hol_H_NY",
+      "hol_H_OT"
+    ]
+  },
+  "diagnostic_m1_no_holidays": {
+    "aicc": -22.342805900429724,
+    "converged": true,
+    "note": "estimated at the same ceiling as the nine pads and therefore comparable to them; NOT comparable to the D5 recorded AICc, which used maxiter = 50. Diagnostic only: D7 selects among the nine pads."
+  },
+  "optimizer": {
+    "method": "lbfgs",
+    "maxiter": 500,
+    "source": "24 Aug 2026 addendum"
+  },
+  "clusters": {
+    "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\data\\holiday_clusters.csv",
+    "sha256": "7dfea1a3b481fc651195f706c61a8ed07a080f17a35851e860f8fac46d200118",
+    "n": 17,
+    "counts": {
+      "H_NY_test": 1,
+      "H_NY_train": 2,
+      "H_OT_test": 5,
+      "H_OT_train": 9
+    }
+  },
+  "next_step": "M2 = M1 + hol_H_NY + hol_H_OT at (b, f) = (3, 2); D10 transfers this pad to M5 without re-tuning.",
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "run_utc": "2026-08-24T12:03:36+00:00"
+}

@@ -1,0 +1,185 @@
+{
+  "protocol_tag": "protocol-v1.6",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "source_d5_protocol_tag": "protocol-v1.3",
+  "row": "D9",
+  "scale": "log1p",
+  "operative_m1": {
+    "source_selection": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d12_d5\\d5_selection.json",
+    "candidate": "fourier_K6",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      1,
+      7
+    ],
+    "with_intercept": false
+  },
+  "candidate_lags": {
+    "min": 28,
+    "max": 119,
+    "step": 7,
+    "values": [
+      28,
+      35,
+      42,
+      49,
+      56,
+      63,
+      70,
+      77,
+      84,
+      91,
+      98,
+      105,
+      112,
+      119
+    ],
+    "n": 14
+  },
+  "stage1_ccf": {
+    "method": "prewhitened cross-correlation (Box et al. 2016)",
+    "filter": {
+      "order": [
+        0,
+        1,
+        0
+      ],
+      "seasonal_order": [
+        0,
+        0,
+        1,
+        7
+      ],
+      "with_intercept": false,
+      "information_criterion": "aicc",
+      "aicc": 14623.356312846345,
+      "converged": true,
+      "iterations": 13,
+      "method": "lbfgs",
+      "maxiter": 500,
+      "d_test": "kpss",
+      "D_test": "ocsb",
+      "max_d": 1,
+      "max_D": 1,
+      "seasonal": true,
+      "seasonal_period": 7,
+      "estimation_start": "2023-07-01",
+      "estimation_end": "2025-11-30",
+      "n_estimation": 884,
+      "indicator_application_start": "2023-03-04",
+      "indicator_application_end": "2025-11-30",
+      "burn_in_indicator": 1,
+      "burn_in_response": 1,
+      "ccf_response_start": "2023-07-02",
+      "ccf_response_end": "2025-11-30",
+      "n_ccf_response": 883,
+      "parameter_names": [
+        "ma.S.L7",
+        "sigma2"
+      ]
+    },
+    "filter_choice_note": "not fixed by the frozen row; auxiliary search-index ARIMA estimated on the frozen training window only using D5 stepwise bounds, s = 7, d <= 1, D <= 1, KPSS/OCSB differencing tests and automatic intercept handling; the fixed fitted state-space filter is then applied to extended indicator history and response",
+    "selected_lags": [
+      42,
+      91,
+      105,
+      70,
+      63
+    ],
+    "raw_ccf_top5_diagnostic": [
+      28,
+      35,
+      42,
+      49,
+      56
+    ],
+    "raw_ccf_agrees": false
+  },
+  "stage2_aicc": {
+    "lags": [
+      42,
+      63,
+      70,
+      91,
+      105
+    ],
+    "aicc": [
+      -23.54097727639953,
+      -20.575007860223188,
+      -20.566701937393418,
+      -20.55110039898222,
+      -20.423712203167085
+    ]
+  },
+  "selected_lag": {
+    "lag": 42,
+    "aicc": -23.54097727639953,
+    "margin_over_runner_up": 2.9659694161763426,
+    "ccf_prewhitened": -0.07239939499251663,
+    "screen_rank": 1,
+    "converged": true
+  },
+  "tie_rule": "tie to shorter lag (frozen D8, inherited by D9), applied at both stages",
+  "optimizer": {
+    "method": "lbfgs",
+    "maxiter": 500,
+    "source": "24 Aug 2026 addendum"
+  },
+  "indicator_scaling": {
+    "applies_to": "Stage-2 AICc fits only",
+    "stage1_ccf_units": "original search_index units",
+    "divisor": 1000.0,
+    "neutrality": "exact exogenous-regressor reparameterisation: at the same optimum fitted values, likelihood, parameter count, AICc and forecasts are unchanged; only the coefficient scale differs",
+    "reason": "optimizer conditioning in Stage-2 M4 fits",
+    "source": "26 Aug 2026 addendum; operative protocol-v1.6",
+    "coefficient_interpretation": "per 1000 queries"
+  },
+  "c3_4_vintage": {
+    "publication_delay_days": 4,
+    "max_days_week_start_to_end": 6,
+    "min_usable_lag": 10,
+    "smallest_candidate_lag": 28,
+    "all_candidates_usable": true,
+    "rule": "a week's value enters only after publication; a seven-day week ends six days after its start, so the conservative all-weekday requirement is lag >= 6 + observed publication delay"
+  },
+  "e6_check": "every candidate lag >= 28 days = the longest horizon, so all regressor values predate the origin",
+  "next_step": "M4 = M1 + search index at lag 42; D10 transfers this lag to M5 without re-tuning.",
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "history": {
+    "path": "data\\indicator_history.csv",
+    "sha256": "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99"
+  },
+  "protocol_addendum": {
+    "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\docs\\addenda.md",
+    "sha256": "157c96f13ff8341f1336f616fec0d95312a02b2292fdcbc9a1fcb4d8071f5c2e"
+  },
+  "run_utc": "2026-08-26T03:32:43+00:00"
+}

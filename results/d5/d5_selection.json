@@ -1,0 +1,181 @@
+{
+  "protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D5",
+  "fallback_row": "D6",
+  "d6_triggered": false,
+  "smoke_mode": false,
+  "scale": "count",
+  "differencing": {
+    "d": 1,
+    "D": 0,
+    "source": "frozen count-scale D2/D3 outcomes"
+  },
+  "selected": {
+    "candidate": "fourier_K1",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      0,
+      7
+    ],
+    "with_intercept": false,
+    "aicc": 6006.900316124787,
+    "lb_pvalue": 0.9114900585094617,
+    "lb_lag": 14,
+    "lb_df": 11,
+    "converged": true
+  },
+  "annual_regressor": {
+    "kind": "fourier",
+    "K": 1,
+    "period": 365.25,
+    "origin": "2023-07-01",
+    "columns": [
+      "fourier_sin1",
+      "fourier_cos1"
+    ]
+  },
+  "candidate_winners": [
+    {
+      "candidate": "monthly",
+      "p": 0,
+      "q": 2,
+      "P": 1,
+      "Q": 1,
+      "aicc": 6032.550273999994,
+      "lb_pvalue": 0.7530464576316136,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K1",
+      "p": 1,
+      "q": 1,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6006.900316124787,
+      "lb_pvalue": 0.9114900585094617,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K2",
+      "p": 1,
+      "q": 1,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6010.245999119129,
+      "lb_pvalue": 0.9096824252575675,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K3",
+      "p": 1,
+      "q": 1,
+      "P": 0,
+      "Q": 1,
+      "aicc": 6011.504248671059,
+      "lb_pvalue": 0.8985935611677572,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K4",
+      "p": 1,
+      "q": 1,
+      "P": 0,
+      "Q": 1,
+      "aicc": 6014.377650322726,
+      "lb_pvalue": 0.8908075310047054,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K5",
+      "p": 1,
+      "q": 2,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6013.201550181947,
+      "lb_pvalue": 0.16350553850100052,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K6",
+      "p": 1,
+      "q": 2,
+      "P": 1,
+      "Q": 1,
+      "aicc": 6011.961770293926,
+      "lb_pvalue": 0.06966865552964546,
+      "lb_pass": true
+    }
+  ],
+  "gate": {
+    "test": "ljung_box",
+    "lag_rule": "max(2*s, k_arma+3) capped at floor(T/5), T = n_train = 884",
+    "lag_observed": [
+      14
+    ],
+    "alpha": 0.05,
+    "df_rule": "lag - (p+q+P+Q)",
+    "pass_rule": "pvalue > alpha",
+    "residuals": "per-fit, post burn-in",
+    "llf_burn": 1
+  },
+  "counts": {
+    "candidates": 7,
+    "visited_valid_fits": 199,
+    "lb_pass": 172,
+    "not_converged": 123
+  },
+  "estimation_sample": {
+    "train_end": "2025-11-30",
+    "n_train": 884,
+    "nobs_effective": 883
+  },
+  "hk_settings": {
+    "start_p": 2,
+    "start_q": 2,
+    "start_P": 1,
+    "start_Q": 1,
+    "max_p": 5,
+    "max_q": 5,
+    "max_P": 2,
+    "max_Q": 2,
+    "d": 1,
+    "D": 0,
+    "m": 7,
+    "information_criterion": "aicc",
+    "stepwise": true,
+    "with_intercept": false,
+    "maxiter": 50,
+    "method": "lbfgs",
+    "error_action": "ignore"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "run_utc": "2026-08-23T10:00:56+00:00"
+}

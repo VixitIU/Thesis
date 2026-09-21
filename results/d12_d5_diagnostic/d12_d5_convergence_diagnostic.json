@@ -1,0 +1,152 @@
+{
+  "protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D5_CONVERGENCE_DIAGNOSTIC",
+  "status": "diagnostic_only",
+  "changes_D5_selection": false,
+  "source_D5": {
+    "selection_record": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d12_d5\\d5_selection.json",
+    "scale": "log1p",
+    "candidate": "fourier_K6",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      1,
+      7
+    ],
+    "with_intercept": false,
+    "recorded_aicc": -16.420278432857387,
+    "recorded_converged": false,
+    "recorded_maxiter": 50,
+    "method": "lbfgs"
+  },
+  "diagnostic_design": {
+    "fresh_fit_each_budget": true,
+    "warm_start": false,
+    "varied_setting": "maxiter only",
+    "budgets": [
+      50,
+      100,
+      200,
+      500
+    ],
+    "aicc_comparison_rtol": 1e-06
+  },
+  "fits": [
+    {
+      "maxiter": 50,
+      "converged": false,
+      "iterations": 50,
+      "warnflag": 1,
+      "function_calls": 1080,
+      "gradient_max_abs": 0.061275160060805585,
+      "aicc": -16.420278432857387,
+      "aic": -17.12779288372444,
+      "loglikelihood": 25.56389644186222,
+      "nobs": 884,
+      "nobs_effective": 883,
+      "k_params_total": 17,
+      "warnings": [
+        "DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals"
+      ],
+      "aicc_delta_vs_d5": 0.0,
+      "aicc_matches_d5": true
+    },
+    {
+      "maxiter": 100,
+      "converged": false,
+      "iterations": 100,
+      "warnflag": 1,
+      "function_calls": 2070,
+      "gradient_max_abs": 0.0036901145292202293,
+      "aicc": -21.99939011620654,
+      "aic": -22.706904567073593,
+      "loglikelihood": 28.353452283536797,
+      "nobs": 884,
+      "nobs_effective": 883,
+      "k_params_total": 17,
+      "warnings": [
+        "DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed).",
+        "ConvergenceWarning: Maximum Likelihood optimization failed to converge. Check mle_retvals"
+      ],
+      "aicc_delta_vs_d5": -5.579111683349154,
+      "aicc_matches_d5": false
+    },
+    {
+      "maxiter": 200,
+      "converged": true,
+      "iterations": 127,
+      "warnflag": 0,
+      "function_calls": 2718,
+      "gradient_max_abs": 4.6868509073762744e-05,
+      "aicc": -22.342805900429724,
+      "aic": -23.050320351296776,
+      "loglikelihood": 28.525160175648388,
+      "nobs": 884,
+      "nobs_effective": 883,
+      "k_params_total": 17,
+      "warnings": [
+        "DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed)."
+      ],
+      "aicc_delta_vs_d5": -5.922527467572337,
+      "aicc_matches_d5": false
+    },
+    {
+      "maxiter": 500,
+      "converged": true,
+      "iterations": 127,
+      "warnflag": 0,
+      "function_calls": 2718,
+      "gradient_max_abs": 4.6868509073762744e-05,
+      "aicc": -22.342805900429724,
+      "aic": -23.050320351296776,
+      "loglikelihood": 28.525160175648388,
+      "nobs": 884,
+      "nobs_effective": 883,
+      "k_params_total": 17,
+      "warnings": [
+        "DeprecationWarning: Setting the shape on a NumPy array has been deprecated in NumPy 2.5.\nAs an alternative, you can create a new view using np.reshape (with copy=False if needed)."
+      ],
+      "aicc_delta_vs_d5": -5.922527467572337,
+      "aicc_matches_d5": false
+    }
+  ],
+  "summary": {
+    "any_higher_budget_converged": true,
+    "first_converged_maxiter": 200,
+    "highest_budget": 500,
+    "highest_budget_converged": true,
+    "highest_budget_aicc": -22.342805900429724,
+    "highest_budget_aicc_delta_vs_d5": -5.922527467572337,
+    "interpretation_constraint": "diagnostic only; D5 selection remains unchanged"
+  },
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "run_utc": "2026-08-24T07:17:55+00:00"
+}
