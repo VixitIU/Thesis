@@ -1,0 +1,10 @@
+horizon,hypothesis,comparison,pvalue_raw,pvalue_holm,reject_holm_5pct
+7,H1a_holidays,M2 vs M1,0.9506204103366498,1.0,False
+7,H1b_fx,M3 vs M1,0.7042287022256783,1.0,False
+7,H1c_search,M4 vs M1,0.7665899319537723,1.0,False
+14,H1a_holidays,M2 vs M1,0.9221928354875413,1.0,False
+14,H1b_fx,M3 vs M1,0.8563219860516016,1.0,False
+14,H1c_search,M4 vs M1,0.9260585177261939,1.0,False
+28,H1a_holidays,M2 vs M1,0.8478036951069419,1.0,False
+28,H1b_fx,M3 vs M1,0.8823762862169439,1.0,False
+28,H1c_search,M4 vs M1,0.8763231010850661,1.0,False
