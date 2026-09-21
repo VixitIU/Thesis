@@ -201,9 +201,7 @@ def main() -> None:
             )
         )
 
-    # Newer D5 artifacts separately record the D4 outcome. Older D5
-    # artifacts may not contain this key, so absence does not invalidate
-    # the already-completed count-scale run.
+
     d5_int = sel.get("d4_intercept")
     if (
         d5_int is not None

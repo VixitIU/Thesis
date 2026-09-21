@@ -90,7 +90,7 @@ Usage
 -----
 python d5_baseline_order_selection.py --data path/to/daily_counts.csv \
     [--date-col date] [--y-col billed_visits] [--outdir results/d5] \
-    [--mlflow] [--mlflow-experiment medical-assistance-demand-forecasting]
+    [--maxiter 500] [--mlflow] [--mlflow-experiment medical-assistance-demand-forecasting]
 
 --smoke runs a reduced, NON-PROTOCOL configuration (lower order caps,
 lower maxiter) for pipeline testing on synthetic data only. Never use
