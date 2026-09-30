@@ -1,0 +1,35 @@
+Performing stepwise search to minimize aicc
+Near non-invertible roots for order (2, 1, 2)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.999)
+ ARIMA(2,1,2)(1,0,1)[7]             : AICC=inf, Time=2.88 sec
+ ARIMA(0,1,0)(0,0,0)[7]             : AICC=366.268, Time=0.25 sec
+First viable model found (366.268)
+ ARIMA(1,1,0)(1,0,0)[7]             : AICC=200.802, Time=0.37 sec
+New best model found (200.802 < 366.268)
+ ARIMA(0,1,1)(0,0,1)[7]             : AICC=-6.505, Time=0.51 sec
+New best model found (-6.505 < 200.802)
+ ARIMA(0,1,1)(0,0,0)[7]             : AICC=-7.352, Time=0.20 sec
+New best model found (-7.352 < -6.505)
+ ARIMA(0,1,1)(1,0,0)[7]             : AICC=-6.597, Time=0.32 sec
+Near non-invertible roots for order (0, 1, 1)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.999)
+ ARIMA(0,1,1)(1,0,1)[7]             : AICC=inf, Time=1.75 sec
+ ARIMA(1,1,1)(0,0,0)[7]             : AICC=-11.294, Time=0.32 sec
+New best model found (-11.294 < -7.352)
+ ARIMA(1,1,1)(1,0,0)[7]             : AICC=-10.666, Time=0.59 sec
+ ARIMA(1,1,1)(0,0,1)[7]             : AICC=-10.566, Time=0.47 sec
+Near non-invertible roots for order (1, 1, 1)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.999)
+ ARIMA(1,1,1)(1,0,1)[7]             : AICC=inf, Time=2.10 sec
+ ARIMA(1,1,0)(0,0,0)[7]             : AICC=199.409, Time=0.17 sec
+ ARIMA(2,1,1)(0,0,0)[7]             : AICC=-10.956, Time=0.58 sec
+ ARIMA(1,1,2)(0,0,0)[7]             : AICC=-9.893, Time=0.37 sec
+ ARIMA(0,1,2)(0,0,0)[7]             : AICC=-11.794, Time=0.26 sec
+New best model found (-11.794 < -11.294)
+ ARIMA(0,1,2)(1,0,0)[7]             : AICC=-11.093, Time=0.44 sec
+ ARIMA(0,1,2)(0,0,1)[7]             : AICC=-10.997, Time=0.52 sec
+Near non-invertible roots for order (0, 1, 2)(1, 0, 1, 7); setting score to inf (at least one inverse root too close to the border of the unit circle: 0.999)
+ ARIMA(0,1,2)(1,0,1)[7]             : AICC=inf, Time=2.03 sec
+ ARIMA(0,1,3)(0,0,0)[7]             : AICC=-10.139, Time=0.40 sec
+ ARIMA(1,1,3)(0,0,0)[7]             : AICC=-10.170, Time=1.10 sec
+ ARIMA(0,1,2)(0,0,0)[7] intercept   : AICC=-10.487, Time=0.48 sec
+
+Best model:  ARIMA(0,1,2)(0,0,0)[7]          
+Total fit time: 16.124 seconds

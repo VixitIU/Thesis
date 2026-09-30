@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/New/Documents/IU%20work/Thesis/project/mlruns/498118687188016022/2f2f703fe25b455381eaf841a00803ef/artifacts
+end_time: 1787727502445
+entry_point_name: ''
+experiment_id: '498118687188016022'
+lifecycle_stage: active
+run_id: 2f2f703fe25b455381eaf841a00803ef
+run_name: D5_convergence_sensitivity
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1787727502295
+status: 3
+tags: []
+user_id: New

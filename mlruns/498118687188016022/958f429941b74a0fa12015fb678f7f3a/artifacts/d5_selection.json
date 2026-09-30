@@ -1,0 +1,182 @@
+{
+  "protocol_tag": "protocol-v1.7",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D5",
+  "fallback_row": "D6",
+  "d6_triggered": false,
+  "smoke_mode": false,
+  "scale": "count",
+  "differencing": {
+    "d": 1,
+    "D": 0,
+    "source": "frozen count-scale D2/D3 outcomes"
+  },
+  "selected": {
+    "candidate": "fourier_K1",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      0,
+      7
+    ],
+    "with_intercept": false,
+    "aicc": 6006.900316124787,
+    "lb_pvalue": 0.9114900585094617,
+    "lb_lag": 14,
+    "lb_df": 11,
+    "converged": true
+  },
+  "annual_regressor": {
+    "kind": "fourier",
+    "K": 1,
+    "period": 365.25,
+    "origin": "2023-07-01",
+    "columns": [
+      "fourier_sin1",
+      "fourier_cos1"
+    ]
+  },
+  "candidate_winners": [
+    {
+      "candidate": "monthly",
+      "p": 0,
+      "q": 2,
+      "P": 1,
+      "Q": 1,
+      "aicc": 6032.286564345614,
+      "lb_pvalue": 0.75699176884754,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K1",
+      "p": 1,
+      "q": 1,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6006.900316124787,
+      "lb_pvalue": 0.9114900585094617,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K2",
+      "p": 1,
+      "q": 1,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6010.245999119129,
+      "lb_pvalue": 0.9096824252575675,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K3",
+      "p": 1,
+      "q": 1,
+      "P": 0,
+      "Q": 1,
+      "aicc": 6011.504097762523,
+      "lb_pvalue": 0.8988363087583005,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K4",
+      "p": 1,
+      "q": 1,
+      "P": 0,
+      "Q": 1,
+      "aicc": 6014.370356187578,
+      "lb_pvalue": 0.8932196256238918,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K5",
+      "p": 1,
+      "q": 2,
+      "P": 0,
+      "Q": 2,
+      "aicc": 6015.056273676082,
+      "lb_pvalue": 0.11678314784285378,
+      "lb_pass": true
+    },
+    {
+      "candidate": "fourier_K6",
+      "p": 1,
+      "q": 2,
+      "P": 1,
+      "Q": 0,
+      "aicc": 6012.946296923121,
+      "lb_pvalue": 0.20232919862980756,
+      "lb_pass": true
+    }
+  ],
+  "gate": {
+    "test": "ljung_box",
+    "lag_rule": "max(2*s, k_arma+3) capped at floor(T/5), T = n_train = 884",
+    "lag_observed": [
+      14
+    ],
+    "alpha": 0.05,
+    "df_rule": "lag - (p+q+P+Q)",
+    "pass_rule": "pvalue > alpha",
+    "residuals": "per-fit, post burn-in",
+    "llf_burn": 1
+  },
+  "counts": {
+    "candidates": 7,
+    "visited_valid_fits": 187,
+    "lb_pass": 159,
+    "not_converged": 0,
+    "intercept_fits_dropped_d4": 6
+  },
+  "estimation_sample": {
+    "train_end": "2025-11-30",
+    "n_train": 884,
+    "nobs_effective": 883
+  },
+  "hk_settings": {
+    "start_p": 2,
+    "start_q": 2,
+    "start_P": 1,
+    "start_Q": 1,
+    "max_p": 5,
+    "max_q": 5,
+    "max_P": 2,
+    "max_Q": 2,
+    "d": 1,
+    "D": 0,
+    "m": 7,
+    "information_criterion": "aicc",
+    "stepwise": true,
+    "with_intercept": false,
+    "maxiter": 500,
+    "method": "lbfgs",
+    "error_action": "ignore"
+  },
+  "data": {
+    "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "run_utc": "2026-09-28T11:07:13+00:00"
+}

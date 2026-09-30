@@ -1,0 +1,177 @@
+{
+  "protocol_tag": "protocol-v1.6",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "source_d5_protocol_tag": "protocol-v1.3",
+  "row": "D10",
+  "scale": "log1p",
+  "selects_nothing": true,
+  "rule": "M5 inherits (b, f) from M2, the FX lag from M3 and the search lag from M4; no re-tuning.",
+  "m5_specification": {
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      1,
+      7
+    ],
+    "with_intercept": false,
+    "annual_regressor": {
+      "kind": "fourier",
+      "K": 6,
+      "period": 365.25,
+      "origin": "2023-07-01",
+      "columns": [
+        "fourier_sin1",
+        "fourier_cos1",
+        "fourier_sin2",
+        "fourier_cos2",
+        "fourier_sin3",
+        "fourier_cos3",
+        "fourier_sin4",
+        "fourier_cos4",
+        "fourier_sin5",
+        "fourier_cos5",
+        "fourier_sin6",
+        "fourier_cos6"
+      ]
+    },
+    "holiday": {
+      "pad_b": 3,
+      "pad_f": 2,
+      "columns": [
+        "hol_H_NY",
+        "hol_H_OT"
+      ],
+      "window": "[start - b, end + f] inclusive; union, binary (C1-9, C1-10)",
+      "days_H_NY": 31,
+      "days_H_OT": 75,
+      "clusters_sha256": "7dfea1a3b481fc651195f706c61a8ed07a080f17a35851e860f8fac46d200118"
+    },
+    "fx": {
+      "lag_days": 84,
+      "column": "fx_lag84",
+      "scaling": "none (C2-3 units: RUB per 1 THB)"
+    },
+    "search": {
+      "lag_days": 42,
+      "column": "search_lag42_per1000",
+      "scaling_divisor": 1000.0,
+      "scaling_source": "26 Aug 2026 addendum; travels with the inherited regressor",
+      "coefficient_interpretation": "per 1000 queries"
+    },
+    "exog_columns": [
+      "fourier_sin1",
+      "fourier_cos1",
+      "fourier_sin2",
+      "fourier_cos2",
+      "fourier_sin3",
+      "fourier_cos3",
+      "fourier_sin4",
+      "fourier_cos4",
+      "fourier_sin5",
+      "fourier_cos5",
+      "fourier_sin6",
+      "fourier_cos6",
+      "hol_H_NY",
+      "hol_H_OT",
+      "fx_lag84",
+      "search_lag42_per1000"
+    ],
+    "n_exog": 16
+  },
+  "source_artifacts": {
+    "d5": {
+      "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d12_d5\\d5_selection.json",
+      "sha256": "676081af1e6345394d80e67924fc54acf276cbcfcf9afde40797bf3f15d179e1",
+      "protocol_tag": "protocol-v1.3"
+    },
+    "d7": {
+      "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d7\\d7_pad_selection.json",
+      "sha256": "7270e511a5b0ea187218fd7a25b8bc32e850452aeb527428ac4b38123ce79ff3",
+      "protocol_tag": "protocol-v1.4"
+    },
+    "d8": {
+      "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d8\\d8_lag_selection.json",
+      "sha256": "efa284b8bf8531982142f6ead0f18db3cdaa68dfb2e2c53e87e492aee8fbf2a1",
+      "protocol_tag": "protocol-v1.5"
+    },
+    "d9": {
+      "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d9\\d9_lag_selection.json",
+      "sha256": "dd014021bcb088a909b771cb8cf6cab344466c99b625cc39a34777ef3c8499c5",
+      "protocol_tag": "protocol-v1.6"
+    }
+  },
+  "inheritance": {
+    "pad_from": {
+      "row": "D7",
+      "artifact": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d7\\d7_pad_selection.json",
+      "protocol_tag": "protocol-v1.4"
+    },
+    "fx_lag_from": {
+      "row": "D8",
+      "artifact": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d8\\d8_lag_selection.json",
+      "protocol_tag": "protocol-v1.5"
+    },
+    "search_lag_from": {
+      "row": "D9",
+      "artifact": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d9\\d9_lag_selection.json",
+      "protocol_tag": "protocol-v1.6"
+    },
+    "re_tuned": false
+  },
+  "m5_training_fit": {
+    "aicc": -27.448684734614737,
+    "converged": true,
+    "iterations": 351,
+    "nobs_effective": 883,
+    "k_params_total": 21,
+    "status": "record and feasibility check only; D10 selects nothing and no rule makes M5 conditional on this value"
+  },
+  "ladder_training_aicc": {
+    "M1": -22.342805900429724,
+    "M2": -20.093800911117313,
+    "M3": -28.809724329724013,
+    "M4": -23.54097727639953,
+    "M5": -27.448684734614737
+  },
+  "optimizer": {
+    "method": "lbfgs",
+    "maxiter": 500,
+    "source": "24 Aug 2026 addendum"
+  },
+  "protocol_addendum": {
+    "path": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\docs\\addenda.md",
+    "sha256": "157c96f13ff8341f1336f616fec0d95312a02b2292fdcbc9a1fcb4d8071f5c2e"
+  },
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "history": {
+    "path": "data\\indicator_history.csv",
+    "sha256": "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99"
+  },
+  "run_utc": "2026-08-26T04:40:15+00:00"
+}

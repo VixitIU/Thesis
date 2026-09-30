@@ -1,0 +1,17 @@
+model,variable,VIF,sample_start,sample_end,n,matrix_rank,n_columns,rank_deficient,diagnostic_constant_added,role
+M2,fourier_sin1,1.0616433808871273,2023-07-01,2025-11-30,884,4,4,False,True,descriptive only; no threshold changes model
+M2,fourier_cos1,1.0873124860859564,2023-07-01,2025-11-30,884,4,4,False,True,descriptive only; no threshold changes model
+M2,hol_H_NY,1.0923765484928152,2023-07-01,2025-11-30,884,4,4,False,True,descriptive only; no threshold changes model
+M2,hol_H_OT,1.0639259153309473,2023-07-01,2025-11-30,884,4,4,False,True,descriptive only; no threshold changes model
+M3,fourier_sin1,1.7158030409616873,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M3,fourier_cos1,1.5308342643251551,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M3,fx_lag84,2.2560477815080096,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M4,fourier_sin1,1.1344096260898162,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M4,fourier_cos1,2.1649716274185473,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M4,search_lag42_per1000,2.3053785249991705,2023-07-01,2025-11-30,884,3,3,False,True,descriptive only; no threshold changes model
+M5,fourier_sin1,1.9434039628140536,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model
+M5,fourier_cos1,2.8224979755111104,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model
+M5,hol_H_NY,1.1001196442933847,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model
+M5,hol_H_OT,1.0785585752694782,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model
+M5,fx_lag84,2.2852122834937125,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model
+M5,search_lag42_per1000,2.32855250829612,2023-07-01,2025-11-30,884,6,6,False,True,descriptive only; no threshold changes model

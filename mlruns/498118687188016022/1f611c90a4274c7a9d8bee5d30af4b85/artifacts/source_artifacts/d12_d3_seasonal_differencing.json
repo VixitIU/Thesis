@@ -1,0 +1,59 @@
+{
+  "protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D3",
+  "branch": "D12",
+  "scale": "log1p",
+  "authorised_by": {
+    "d2_record": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d12_d2\\d12_d2_differencing.json",
+    "d11_triggered": true,
+    "d_selected_at_transformed_D2": 1
+  },
+  "ocsb": {
+    "implementation": "pmdarima.arima.OCSBTest",
+    "s": 7,
+    "lag_method": "aic",
+    "statistic": -23.862928735617203,
+    "critical_value": -1.8452364865328739,
+    "rejects": true
+  },
+  "decision": {
+    "rule": "D = 1 if OCSB at s=7 does not reject; otherwise D = 0",
+    "D": 0
+  },
+  "operative_differencing": {
+    "d": 1,
+    "D": 0,
+    "source": "d from transformed-scale D2; D from transformed-scale D3"
+  },
+  "d4": {
+    "rule": "constant iff d = D = 0",
+    "with_intercept": false,
+    "source": "D4 mechanically reapplied after transformed-scale D2/D3"
+  },
+  "next_step": "D4 outcome is with_intercept = False. Re-run D5 on log(y+1) with --scale log1p --d 1 --D 0.",
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "run_utc": "2026-08-24T06:50:46+00:00"
+}

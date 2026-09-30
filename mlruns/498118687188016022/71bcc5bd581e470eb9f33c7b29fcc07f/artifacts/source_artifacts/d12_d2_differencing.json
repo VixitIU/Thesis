@@ -1,0 +1,143 @@
+{
+  "protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D2",
+  "branch": "D12",
+  "scale": "log1p",
+  "authorised_by": {
+    "d11_record": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d11\\d11_scale_trigger.json",
+    "triggered": true,
+    "jarque_bera_p": 2.0494449300619538e-25,
+    "spearman_rho": 0.30546559594305533
+  },
+  "pilot_form": {
+    "fourier_K": 3,
+    "fourier_period": 365.25,
+    "fourier_origin": "2023-07-01",
+    "day_of_week": "intercept + 6 dummies (spans the same column space as 7 dummies without an intercept; residuals identical)",
+    "regressors": [
+      "const",
+      "fourier_sin1",
+      "fourier_cos1",
+      "fourier_sin2",
+      "fourier_cos2",
+      "fourier_sin3",
+      "fourier_cos3",
+      "dow_0",
+      "dow_1",
+      "dow_2",
+      "dow_3",
+      "dow_4",
+      "dow_5"
+    ],
+    "scope": "this test only; discarded afterwards"
+  },
+  "candidate_set": [
+    0,
+    1
+  ],
+  "alpha": 0.05,
+  "levels": {
+    "adf": {
+      "test": "ADF",
+      "null": "unit root",
+      "statistic": -4.39593765592656,
+      "pvalue": 0.00030178512754787975,
+      "crit_5pct": -2.864845006291261,
+      "used_lag": 7,
+      "nobs": 876,
+      "rejects_by_critical_value": true,
+      "rejects_by_pvalue": true,
+      "rejects": true,
+      "settings": {
+        "regression": "c",
+        "autolag": "AIC"
+      }
+    },
+    "kpss": {
+      "test": "KPSS",
+      "null": "stationarity",
+      "statistic": 1.490667669072844,
+      "pvalue": 0.01,
+      "pvalue_table_clipped": true,
+      "crit_5pct": 0.463,
+      "used_lags": 17,
+      "rejects_by_critical_value": true,
+      "rejects_by_pvalue": true,
+      "rejects": true,
+      "settings": {
+        "regression": "c",
+        "nlags": "auto"
+      }
+    }
+  },
+  "decision": {
+    "rule": "d = 0 iff ADF rejects at 5% AND KPSS does not reject at 5%; otherwise d = 1. d = 2 excluded a priori.",
+    "adf_rejects_unit_root": true,
+    "kpss_rejects_stationarity": true,
+    "d": 1
+  },
+  "confirmatory_check": {
+    "applied_to": "first difference of the pilot residuals",
+    "n": 883,
+    "adf": {
+      "test": "ADF",
+      "null": "unit root",
+      "statistic": -17.98079405453451,
+      "pvalue": 2.7752644790562808e-30,
+      "crit_5pct": -2.864845006291261,
+      "used_lag": 6,
+      "nobs": 876,
+      "rejects_by_critical_value": true,
+      "rejects_by_pvalue": true,
+      "rejects": true,
+      "settings": {
+        "regression": "c",
+        "autolag": "AIC"
+      }
+    },
+    "kpss": {
+      "test": "KPSS",
+      "null": "stationarity",
+      "statistic": 0.23818666560656063,
+      "pvalue": 0.1,
+      "pvalue_table_clipped": true,
+      "crit_5pct": 0.463,
+      "used_lags": 57,
+      "rejects_by_critical_value": false,
+      "rejects_by_pvalue": false,
+      "rejects": false,
+      "settings": {
+        "regression": "c",
+        "nlags": "auto"
+      }
+    },
+    "clean": true,
+    "status": "diagnostic only -- never used to raise d, since d = 2 is excluded a priori"
+  },
+  "next_step": "D3 (OCSB at s = 7) on log(y + 1), then D4, then D5 with --scale log1p --d 1 --D <from D3>",
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "run_utc": "2026-08-24T06:07:13+00:00"
+}

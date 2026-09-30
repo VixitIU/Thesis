@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/New/Documents/IU%20work/Thesis/project/mlruns/498118687188016022/eb040b642a39423c866ac9b13bdc7c16/artifacts
+end_time: 1787408443924
+entry_point_name: ''
+experiment_id: '498118687188016022'
+lifecycle_stage: active
+run_id: eb040b642a39423c866ac9b13bdc7c16
+run_name: D4 constant
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1787408443824
+status: 3
+tags: []
+user_id: New

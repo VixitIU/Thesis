@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/New/Documents/IU%20work/Thesis/project/mlruns/498118687188016022/6ded657a5c5347d8a956c53a32bc029c/artifacts
+end_time: 1790740730117
+entry_point_name: ''
+experiment_id: '498118687188016022'
+lifecycle_stage: active
+run_id: 6ded657a5c5347d8a956c53a32bc029c
+run_name: ARCHIVE POSTHOC D11 recheck
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1790740730066
+status: 3
+tags: []
+user_id: New

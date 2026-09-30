@@ -1,0 +1,86 @@
+{
+  "protocol_tag": "protocol-v1.3",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "D11",
+  "fallback_row": "D12",
+  "evaluated_on": {
+    "source_selection": "C:\\Users\\New\\Documents\\IU work\\Thesis\\project\\results\\d5\\d5_selection.json",
+    "candidate": "fourier_K1",
+    "order": [
+      1,
+      1,
+      1
+    ],
+    "seasonal_order": [
+      1,
+      0,
+      0,
+      7
+    ],
+    "with_intercept": false,
+    "scale": "count",
+    "refit_aicc": 6006.900316124787,
+    "d5_recorded_aicc": 6006.900316124787,
+    "refit_converged": true,
+    "n_residuals": 883,
+    "burn_in_dropped": 1
+  },
+  "jarque_bera": {
+    "statistic": 113.6941166683759,
+    "pvalue": 2.0494449300619538e-25,
+    "skew": 0.42348731062908707,
+    "kurtosis": 4.540405079037839,
+    "alpha": 0.01,
+    "rejects_normality": true
+  },
+  "spearman_absresid_vs_fitted": {
+    "rho": 0.30546559594305533,
+    "abs_rho": 0.30546559594305533,
+    "pvalue": 1.5866716990253644e-20,
+    "threshold": 0.3,
+    "reading": "rho(|residual|, fitted) > threshold",
+    "exceeds_threshold": true
+  },
+  "decision": {
+    "rule": "trigger iff (JB rejects at 0.01) AND (Spearman rho(|residual|, fitted) > 0.3)",
+    "condition_a_normality_rejected": true,
+    "condition_b_heteroskedastic": true,
+    "triggered": true,
+    "next_step": "D12: re-run D2, D3, D4 and D5 on log(y+1), then continue the ladder on the transformed scale (19 Aug and 23 Aug 2026 addenda)"
+  },
+  "differencing": {
+    "d": 1,
+    "D": 0,
+    "source": "inherited from count-scale D5 selection",
+    "d5_recorded_source": "frozen count-scale D2/D3 outcomes"
+  },
+  "constant": {
+    "with_intercept": false,
+    "source": "inherited from count-scale D5 selection",
+    "d5_recorded_source": null
+  },
+  "smoke_mode": false,
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "data": {
+    "path": "..\\data\\aligned_train.csv",
+    "sha256": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313"
+  },
+  "run_utc": "2026-08-24T05:21:46+00:00"
+}

@@ -1,0 +1,44 @@
+Performing stepwise search to minimize aicc
+ ARIMA(2,1,2)(1,0,1)[7]             : AICC=6015.534, Time=2.69 sec
+First viable model found (6015.534)
+ ARIMA(0,1,0)(0,0,0)[7]             : AICC=6349.903, Time=0.20 sec
+ ARIMA(1,1,0)(1,0,0)[7]             : AICC=6195.236, Time=0.28 sec
+ ARIMA(0,1,1)(0,0,1)[7]             : AICC=6022.795, Time=0.86 sec
+ ARIMA(2,1,2)(0,0,1)[7]             : AICC=6013.486, Time=2.09 sec
+New best model found (6013.486 < 6015.534)
+ ARIMA(2,1,2)(0,0,0)[7]             : AICC=6015.941, Time=1.64 sec
+ ARIMA(2,1,2)(0,0,2)[7]             : AICC=6015.536, Time=4.11 sec
+ ARIMA(2,1,2)(1,0,0)[7]             : AICC=6013.521, Time=1.70 sec
+ ARIMA(2,1,2)(1,0,2)[7]             : AICC=6017.591, Time=4.42 sec
+ ARIMA(1,1,2)(0,0,1)[7]             : AICC=6012.264, Time=1.84 sec
+New best model found (6012.264 < 6013.486)
+ ARIMA(1,1,2)(0,0,0)[7]             : AICC=6014.114, Time=0.73 sec
+ ARIMA(1,1,2)(1,0,1)[7]             : AICC=6014.298, Time=3.03 sec
+ ARIMA(1,1,2)(0,0,2)[7]             : AICC=6014.298, Time=3.33 sec
+ ARIMA(1,1,2)(1,0,0)[7]             : AICC=6012.253, Time=1.77 sec
+New best model found (6012.253 < 6012.264)
+ ARIMA(1,1,2)(2,0,0)[7]             : AICC=6014.298, Time=2.67 sec
+ ARIMA(1,1,2)(2,0,1)[7]             : AICC=6016.415, Time=1.41 sec
+ ARIMA(0,1,2)(1,0,0)[7]             : AICC=6010.403, Time=0.88 sec
+New best model found (6010.403 < 6012.253)
+ ARIMA(0,1,2)(0,0,0)[7]             : AICC=6012.100, Time=0.47 sec
+ ARIMA(0,1,2)(2,0,0)[7]             : AICC=6012.442, Time=1.95 sec
+ ARIMA(0,1,2)(1,0,1)[7]             : AICC=6012.464, Time=1.23 sec
+ ARIMA(0,1,2)(0,0,1)[7]             : AICC=6010.408, Time=1.14 sec
+ ARIMA(0,1,2)(2,0,1)[7]             : AICC=6014.513, Time=1.52 sec
+ ARIMA(0,1,1)(1,0,0)[7]             : AICC=6022.809, Time=0.78 sec
+ ARIMA(0,1,3)(1,0,0)[7]             : AICC=6012.254, Time=1.05 sec
+ ARIMA(1,1,1)(1,0,0)[7]             : AICC=6010.246, Time=1.02 sec
+New best model found (6010.246 < 6010.403)
+ ARIMA(1,1,1)(0,0,0)[7]             : AICC=6012.304, Time=0.53 sec
+ ARIMA(1,1,1)(2,0,0)[7]             : AICC=6012.286, Time=2.11 sec
+ ARIMA(1,1,1)(1,0,1)[7]             : AICC=6012.287, Time=1.78 sec
+ ARIMA(1,1,1)(0,0,1)[7]             : AICC=6010.260, Time=1.08 sec
+ ARIMA(1,1,1)(2,0,1)[7]             : AICC=6014.333, Time=2.23 sec
+ ARIMA(2,1,1)(1,0,0)[7]             : AICC=6012.255, Time=1.33 sec
+ ARIMA(0,1,0)(1,0,0)[7]             : AICC=6349.868, Time=0.14 sec
+ ARIMA(2,1,0)(1,0,0)[7]             : AICC=6121.768, Time=0.34 sec
+ ARIMA(1,1,1)(1,0,0)[7] intercept   : AICC=6012.054, Time=1.30 sec
+
+Best model:  ARIMA(1,1,1)(1,0,0)[7]          
+Total fit time: 53.660 seconds

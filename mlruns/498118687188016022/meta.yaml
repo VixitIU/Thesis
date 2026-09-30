@@ -1,0 +1,9 @@
+artifact_location: file:///C:/Users/New/Documents/IU%20work/Thesis/project/mlruns/498118687188016022
+creation_time: 1787402590816
+effective_trace_archival_retention: null
+experiment_id: '498118687188016022'
+last_update_time: 1787402590816
+lifecycle_stage: active
+name: medical-assistance-demand-forecasting
+trace_location: null
+workspace: default

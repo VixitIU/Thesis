@@ -1,0 +1,6 @@
+model,description,aicc,source
+M1,"baseline, annual form only",-11.793988137353098,D7 diagnostic refit
+M2,"M1 + holidays at pad (3, 2)",-11.026402912145233,D7
+M3,M1 + FX at lag 84,-13.432552729041042,D8
+M4,M1 + search at lag 42,-10.728356501906244,D9
+M5,M1 + all three indicators,-12.189800679202776,D10

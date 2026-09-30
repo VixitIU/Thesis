@@ -1,0 +1,121 @@
+{
+  "protocol_tag": "protocol-v1.8",
+  "protocol_freeze_tag": "protocol-v1.0",
+  "row": "E",
+  "mode": "preflight",
+  "run_utc": "2026-09-21T06:42:23+00:00",
+  "environment_mismatch": [],
+  "environment": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1",
+    "scikit-learn": "1.9.0"
+  },
+  "d1_environment_frozen": {
+    "python": "3.12.13",
+    "statsmodels": "0.14.6",
+    "pandas": "2.3.3",
+    "numpy": "2.5.2",
+    "scipy": "1.18.0",
+    "pmdarima": "2.1.1"
+  },
+  "hashes": {
+    "full_data": "2ff5c57e4022a3881ae1edf74954d8064f211f032c79a85f9488bc195c326156",
+    "train_data": "4224fe90606f4a77e71dafadb99538a8ac878555a32805a48219f27cf7809313",
+    "history": "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99",
+    "clusters": "7dfea1a3b481fc651195f706c61a8ed07a080f17a35851e860f8fac46d200118",
+    "d10": "21d74f132a81cc2e7828944af2c2c7a206e869ca1224cba303344fb5c5dcec60"
+  },
+  "operative_spec": {
+    "candidate": "fourier_K1",
+    "order": [
+      0,
+      1,
+      2
+    ],
+    "seasonal_order": [
+      0,
+      0,
+      0,
+      7
+    ],
+    "with_intercept": false,
+    "b_pad": 3,
+    "f_pad": 2,
+    "fx_lag": 84,
+    "search_lag": 42,
+    "search_divisor": 1000.0,
+    "model_columns": {
+      "M1": [
+        "fourier_sin1",
+        "fourier_cos1"
+      ],
+      "M2": [
+        "fourier_sin1",
+        "fourier_cos1",
+        "hol_H_NY",
+        "hol_H_OT"
+      ],
+      "M3": [
+        "fourier_sin1",
+        "fourier_cos1",
+        "fx_lag84"
+      ],
+      "M4": [
+        "fourier_sin1",
+        "fourier_cos1",
+        "search_lag42_per1000"
+      ],
+      "M5": [
+        "fourier_sin1",
+        "fourier_cos1",
+        "hol_H_NY",
+        "hol_H_OT",
+        "fx_lag84",
+        "search_lag42_per1000"
+      ]
+    }
+  },
+  "evaluation": {
+    "window": "expanding",
+    "origin_step_days": 1,
+    "horizons": [
+      7,
+      14,
+      28
+    ],
+    "reestimate": "coefficients only",
+    "reselection": false,
+    "forecast_scale": "original count scale",
+    "inverse": "exp(m_h + s_h^2 / 2) - 1",
+    "m0": "same calendar date of previous year; 29 February = arithmetic mean of 28 February and 1 March of previous year",
+    "search_safe_availability_days": 10
+  },
+  "n_origins": 216,
+  "first_origin": "2025-11-30",
+  "last_origin": "2026-07-03",
+  "last_target_h28": "2026-07-31",
+  "n_unique_evaluation_targets": 237,
+  "e6_checks": 648,
+  "mase_denominator": 12.453667953667953,
+  "mase_window": [
+    "2024-07-01",
+    "2025-11-30"
+  ],
+  "d10_replication_gate": {
+    "passed": true,
+    "d10_m5_aicc": -12.189800679202776,
+    "rebuilt_m5_aicc": -12.189800679202776,
+    "absolute_difference": 0.0,
+    "tolerance": 0.001,
+    "training_window": [
+      "2023-07-01",
+      "2025-11-30"
+    ]
+  },
+  "vif_basis": "frozen training design only; exact exogenous matrix; diagnostic-only constant added for conventional centered VIF; descriptive only",
+  "test_window_forecast_produced": false
+}
