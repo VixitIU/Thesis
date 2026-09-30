@@ -1,22 +1,18 @@
 #!/usr/bin/env python
 """Thesis exhibits -- post hoc presentation only; no reported result is re-estimated.
 
-Figures, numbered in the order they appear in Chapter 4:
+Figures, numbered as in the thesis:
 
-  fig1_case_series.png            4.1    daily cases, split, padded holiday windows
-  fig2_acf_pacf_m1.png            4.3.2  correlograms
-  fig3_lag_screen.png             4.3.3  raw vs prewhitened CCF, screened lags, dAICc
-  fig4_mae_excess_by_horizon.png  4.5    MAE of M2-M5 relative to M1
-  fig5_test_window_forecasts.png  4.8    test window and New Year window, h = 7/14/28
-  fig6_weekday_mae_m1.png         4.8    M1 absolute error by target weekday (post hoc)
+  fig1_mae_excess_by_horizon.png  4.5  MAE of M2-M5 relative to M1
+  fig2_case_series.png            4.8  daily cases, split, padded holiday windows
+  fig3_test_window_forecasts.png  4.8  test window and New Year window, h = 7/14/28
+  fig4_weekday_mae_m1.png         4.8  M1 absolute error by target weekday (post hoc)
 
-Tables for Appendix C and for checking the prose (CSV, in <outdir>/tables):
+Tables for Appendix C and D (CSV, in <outdir>/tables):
 
-  tableC_d5_log_candidates_50_vs_500.csv  per-candidate winners, both ceilings
-  tableC_test_calculation.csv             every step of the 15 tests
-  tableC_reproducibility.csv              tags, input hashes, environment
-  tableC_training_coefficients.csv        indicator coefficients of M2-M5 (descriptive)
-  table_mae_excess_pct.csv                MAE above M1, from unrounded values
+  tableC_d5_log_candidates_50_vs_500.csv  per-candidate winners, both ceilings (Table 12)
+  tableC_test_calculation.csv             every step of the 15 tests (Table 13)
+  tableC_reproducibility.csv              tags, input hashes, environment (Appendix D)
 
 Estimation performed: refits of M1-M5 on the frozen 884-day training window
 only. Every refit must reproduce the AICc recorded by its Section D artifact,
