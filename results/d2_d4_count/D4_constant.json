@@ -1,0 +1,35 @@
+{
+  "exported_utc": "2026-09-30T03:59:14+00:00",
+  "source": "MLflow file store (export only; nothing re-run)",
+  "run_id": "eb040b642a39423c866ac9b13bdc7c16",
+  "run_name": "D4 constant",
+  "experiment_id": "498118687188016022",
+  "status": "FINISHED",
+  "start_utc": "2026-08-22T14:20:43+00:00",
+  "end_utc": "2026-08-22T14:20:43+00:00",
+  "params": {
+    "constant": "False",
+    "diff_d": "1",
+    "env_numpy": "2.5.2",
+    "env_pandas": "2.3.3",
+    "env_pmdarima": "2.1.1",
+    "env_python": "3.12.13",
+    "env_scipy": "1.18.0",
+    "env_statsmodels": "0.14.6",
+    "seasonal_D": "0"
+  },
+  "metrics": {},
+  "tags": {
+    "drift_imposed": "False",
+    "drift_permitted_by_HK2008_at_d_plus_D_eq_1": "True",
+    "git_branch": "main",
+    "git_commit": "4bbd488dbc55e6ab1cb48d2b278f0f451fd1d640",
+    "git_dirty": "True",
+    "mlflow.runName": "D4 constant",
+    "mlflow.source.name": "Untitled.ipynb",
+    "mlflow.source.type": "NOTEBOOK",
+    "mlflow.user": "New",
+    "protocol_stage": "D4",
+    "rule": "constant iff d = D = 0"
+  }
+}

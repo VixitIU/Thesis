@@ -2,3 +2,5 @@
 *.docx binary
 *.xlsx binary
 *.pptx binary
+*.csv  text eol=crlf
+*.json text eol=crlf

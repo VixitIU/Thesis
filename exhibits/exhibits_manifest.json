@@ -1,0 +1,42 @@
+{
+  "purpose": "post hoc presentation; no reported result re-estimated",
+  "run_utc": "2026-09-30T11:02:40+00:00",
+  "git_commit": "18b7844c51beecb32426a73d543d06306f38dfb2",
+  "inputs_sha256": {
+    "full_data": "2ff5c57e4022a3881ae1edf74954d8064f211f032c79a85f9488bc195c326156",
+    "history": "ae994353fa0310d28240fb3740c5f6cf61d11be3847293f1ca2ab84243323f99",
+    "clusters": "7dfea1a3b481fc651195f706c61a8ed07a080f17a35851e860f8fac46d200118"
+  },
+  "refit_checks": {
+    "M1": {
+      "aicc": -11.793988137353098,
+      "recorded": -11.793988137353098,
+      "ljung_box_p": 0.33964288184070607
+    },
+    "M2": {
+      "aicc": -11.026402912145233,
+      "recorded": -11.026402912145233
+    },
+    "M3": {
+      "aicc": -13.432552729041042,
+      "recorded": -13.432552729041042
+    },
+    "M4": {
+      "aicc": -10.728356501906244,
+      "recorded": -10.728356501906244
+    },
+    "M5": {
+      "aicc": -12.189800679202776,
+      "recorded": -12.189800679202776
+    }
+  },
+  "outputs": [
+    "fig1_case_series.png",
+    "fig2_mae_excess_by_horizon.png",
+    "fig3_test_window_forecasts.png",
+    "fig4_weekday_mae_m1.png",
+    "tables/tableC_d5_log_candidates_50_vs_500.csv",
+    "tables/tableC_test_calculation.csv",
+    "tables/tableC_reproducibility.csv"
+  ]
+}

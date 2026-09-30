@@ -1,0 +1,40 @@
+{
+  "exported_utc": "2026-09-30T03:59:14+00:00",
+  "source": "MLflow file store (export only; nothing re-run)",
+  "run_id": "7751096ab9a846d1915e1639bcbb07e0",
+  "run_name": "D3 seasonal-differencing",
+  "experiment_id": "498118687188016022",
+  "status": "FINISHED",
+  "start_utc": "2026-08-22T13:51:05+00:00",
+  "end_utc": "2026-08-22T13:51:06+00:00",
+  "params": {
+    "D_selected": "0",
+    "applied_to": "cases in levels",
+    "env_numpy": "2.5.2",
+    "env_pandas": "2.3.3",
+    "env_pmdarima": "2.1.1",
+    "env_python": "3.12.13",
+    "env_scipy": "1.18.0",
+    "env_statsmodels": "0.14.6",
+    "n_train": "884",
+    "ocsb_lag_method": "aic",
+    "ocsb_max_lag": "3",
+    "s": "7"
+  },
+  "metrics": {
+    "ocsb_crit_val": -1.8452364865328739,
+    "ocsb_stat": -23.361542418246735,
+    "s": 7.0
+  },
+  "tags": {
+    "git_branch": "main",
+    "git_commit": "3ccf82effcfbface84048582548d9a5bca9d5506",
+    "git_dirty": "True",
+    "mlflow.runName": "D3 seasonal-differencing",
+    "mlflow.source.name": "Untitled.ipynb",
+    "mlflow.source.type": "NOTEBOOK",
+    "mlflow.user": "New",
+    "ocsb_rejects": "True",
+    "protocol_stage": "D3"
+  }
+}

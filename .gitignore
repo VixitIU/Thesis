@@ -8,5 +8,5 @@ __pycache__/
 envs/
 ~$*.docx
 anaconda_projects/
-mlruns/
-mlruns_backup_20260824/
+mlruns/*
+!mlruns/498118687188016022/

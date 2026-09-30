@@ -1,0 +1,8 @@
+annual_form,orders_maxiter50,aicc_maxiter50,converged_maxiter50,orders_maxiter500,aicc_maxiter500,converged_maxiter500,ljung_box_p_maxiter500
+monthly,"(3,1,2)(1,0,1)[7]",3.002,False,"(3,1,1)(0,0,0)[7]",13.1,True,0.486
+fourier_K1,"(0,1,2)(0,0,0)[7]",-11.794,True,"(0,1,2)(0,0,0)[7]",-11.794,True,0.34
+fourier_K2,"(0,1,2)(0,0,0)[7]",-8.223,True,"(0,1,2)(0,0,0)[7]",-8.223,True,0.347
+fourier_K3,"(1,1,1)(1,0,2)[7]",-16.211,False,"(0,1,2)(0,0,0)[7]",-11.474,True,0.394
+fourier_K4,"(1,1,1)(1,0,1)[7]",-15.941,False,"(0,1,2)(0,0,0)[7]",-10.519,True,0.409
+fourier_K5,"(2,1,2)(1,0,1)[7]",-10.956,False,"(0,1,2)(0,0,0)[7]",-9.175,True,0.405
+fourier_K6,"(1,1,1)(1,0,1)[7]",-16.42,False,"(0,1,2)(0,0,0)[7]",-10.841,True,0.411
